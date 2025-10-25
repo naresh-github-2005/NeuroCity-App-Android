@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 🌙 Core Dark Mode Palette -->
+    <color name="background_color">#121212</color>  <!-- Deep dark background -->
+    <color name="surface_color">#1E1E1E</color>    <!-- Slightly lighter card/surface -->
+    <color name="on_background">#EDEDED</color>    <!-- Text on dark background -->
+    <color name="on_surface">#FAFAFA</color>       <!-- Text on surfaces -->
+
+    <!-- 💜 Brand & Accent Colors -->
+    <color name="primary_color">#8C9EFF</color>    <!-- Vibrant indigo accent -->
+    <color name="primary_variant">#536DFE</color>  <!-- Slightly darker tone -->
+    <color name="secondary_color">#64B5F6</color>  <!-- Soft blue secondary accent -->
+    <color name="accent_color">#FF80AB</color>     <!-- Pink accent for highlights -->
+
+    <!-- ✏️ Input & UI Elements -->
+    <color name="input_box_stroke">#5C6BC0</color>  <!-- Indigo stroke for text fields -->
+    <color name="input_hint">#9FA8DA</color>        <!-- Muted hint text color -->
+    <color name="input_text">#FFFFFF</color>        <!-- Actual text color in fields -->
+
+    <!-- 🔘 Button & Action Colors -->
+    <color name="button_bg_primary">#3949AB</color>  <!-- Solid button background -->
+    <color name="button_bg_secondary">#283593</color> <!-- For secondary buttons -->
+    <color name="button_text_color">#FFFFFF</color>  <!-- Text on buttons -->
+
+    <!-- ⚙️ Radio Buttons & Toggles -->
+    <color name="radio_button_tint">#9FA8DA</color>
+    <color name="radio_button_checked">#8C9EFF</color>
+
+    <!-- 🖋️ Generic Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="divider_color">#2C2C2C</color>     <!-- Subtle dividers -->
+    <color name="disabled_text">#7E7E7E</color>     <!-- For disabled elements -->
+
+    <!-- ✅ Status / Feedback Colors -->
+    <color name="success_green">#81C784</color>
+    <color name="warning_yellow">#FFD54F</color>
+    <color name="error_red">#E57373</color>
+    <color name="info_blue">#4FC3F7</color>
+
+</resources>

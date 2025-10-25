@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "171430606445",
+    "project_id": "neurocitylite",
+    "storage_bucket": "neurocitylite.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171430606445:android:717ccb965121b2d7b1f164",
+        "android_client_info": {
+          "package_name": "com.example.neurocity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171430606445-ihv7upq0dlhg5792dmdmn67qi3o5k450.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.neurocity",
+            "certificate_hash": "1312dfb0cf96aa0e2002e5f1b323bbe2573dac50"
+          }
+        },
+        {
+          "client_id": "171430606445-b06orlm4gfkac1ho0megsrabqnu1b18f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsbgBLjeZC4rQr7xdsW3kQ8aWn9WMZfaY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171430606445-b06orlm4gfkac1ho0megsrabqnu1b18f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
