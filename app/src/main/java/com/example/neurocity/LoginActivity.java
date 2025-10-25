@@ -13,7 +13,7 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.auth.*;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.*;
 
 import java.util.HashMap;
 
@@ -22,8 +22,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText editEmail, editPassword;
     Button btnLogin, btnGoToRegister;
     ProgressBar progressBar;
-    RadioGroup radioGroupRole;
-    RadioButton radioUser, radioAdmin;
     SignInButton btnGoogleSignIn;
 
     private FirebaseAuth mAuth;
@@ -44,9 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnGoToRegister = findViewById(R.id.btnGoToRegister);
         progressBar = findViewById(R.id.progressBar);
-        radioGroupRole = findViewById(R.id.radioGroupRole);
-        radioUser = findViewById(R.id.radioUser);
-        radioAdmin = findViewById(R.id.radioAdmin);
         btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
 
         // ---------------------------
@@ -78,27 +73,14 @@ public class LoginActivity extends AppCompatActivity {
 
             progressBar.setVisibility(ProgressBar.VISIBLE);
 
-            String role = radioUser.isChecked() ? "user" : "admin";
-
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         progressBar.setVisibility(ProgressBar.GONE);
                         if (task.isSuccessful()) {
-                            String uid = mAuth.getCurrentUser().getUid();
-
-                            // Save role to Firestore (overwrite each login)
-                            db.collection("users").document(uid)
-                                    .set(new HashMap<String, Object>() {{
-                                        put("email", email);
-                                        put("role", role);
-                                    }})
-                                    .addOnSuccessListener(aVoid -> {
-                                        Toast.makeText(this, "Login successful as " + role, Toast.LENGTH_SHORT).show();
-                                        redirectUser(role);
-                                    })
-                                    .addOnFailureListener(e ->
-                                            Toast.makeText(this, "Error saving role: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                                    );
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            if (user != null) {
+                                fetchUserRole(user.getUid());
+                            }
                         } else {
                             Toast.makeText(this, "Auth failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -145,17 +127,22 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            String role = radioUser.isChecked() ? "user" : "admin";
-                            // Save role to Firestore
+                            // Fetch or create user document if it doesn't exist
                             db.collection("users").document(user.getUid())
-                                    .set(new HashMap<String, Object>() {{
-                                        put("email", user.getEmail());
-                                        put("role", role);
-                                    }})
-                                    .addOnSuccessListener(aVoid -> redirectUser(role))
-                                    .addOnFailureListener(e ->
-                                            Toast.makeText(this, "Error saving role: " + e.getMessage(), Toast.LENGTH_SHORT).show()
-                                    );
+                                    .get()
+                                    .addOnSuccessListener(document -> {
+                                        if (document.exists()) {
+                                            fetchUserRole(user.getUid());
+                                        } else {
+                                            // Default to user role if new Google account
+                                            db.collection("users").document(user.getUid())
+                                                    .set(new HashMap<String, Object>() {{
+                                                        put("email", user.getEmail());
+                                                        put("role", "user");
+                                                    }})
+                                                    .addOnSuccessListener(aVoid -> redirectUser("user"));
+                                        }
+                                    });
                         }
                     } else {
                         Toast.makeText(this, "Google authentication failed", Toast.LENGTH_SHORT).show();
@@ -163,8 +150,25 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    // 🔹 Fetch role from Firestore
+    private void fetchUserRole(String uid) {
+        db.collection("users").document(uid).get()
+                .addOnSuccessListener(document -> {
+                    if (document.exists()) {
+                        String role = document.getString("role");
+                        if (role == null) role = "user";
+                        redirectUser(role);
+                    } else {
+                        Toast.makeText(this, "No user data found. Please register.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error fetching user role: " + e.getMessage(), Toast.LENGTH_SHORT).show()
+                );
+    }
+
     private void redirectUser(String role) {
-        if ("admin".equals(role)) {
+        if ("official".equalsIgnoreCase(role)) {
             startActivity(new Intent(this, AdminDashboardActivity.class));
         } else {
             startActivity(new Intent(this, MainActivity.class));

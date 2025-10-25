@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 🔹 Title -->
+        <TextView
+            android:text="App Settings"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <!-- 🔹 Notifications Toggle -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enable Notifications"
+            android:checked="true"
+            android:paddingVertical="8dp" />
+
+        <!-- 🔹 Dark Mode Toggle -->
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/switch_dark_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dark Mode"
+            android:checked="false"
+            android:paddingVertical="8dp" />
+
+        <!-- 🔹 Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="16dp"
+            android:background="?attr/colorOutline" />
+
+        <!-- 🔹 About Section -->
+        <TextView
+            android:text="About"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_app_info"
+            android:text="NeuroCity v1.0\nDeveloped by Arfath, Naresh and Yusuf"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>
