@@ -37,6 +37,7 @@ public class UploadFragment extends Fragment {
     ProgressBar progressBar;
     TextView tvResult, tvLocation;
     Spinner spnIssueType;
+    EditText editDescription; // ✅ New field for optional description
 
     Uri imageUri = null;
     FusedLocationProviderClient fusedLocationClient;
@@ -61,6 +62,7 @@ public class UploadFragment extends Fragment {
         tvResult = view.findViewById(R.id.tvResult);
         tvLocation = view.findViewById(R.id.tvLocation);
         spnIssueType = view.findViewById(R.id.spinnerIssueType);
+        editDescription = view.findViewById(R.id.editDescription); // ✅ Link to layout
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
         db = FirebaseFirestore.getInstance();
@@ -178,6 +180,8 @@ public class UploadFragment extends Fragment {
     }
 
     private void saveIssueToFirestore(String userId, String imageUrl, String issueType) {
+        String description = editDescription.getText().toString().trim(); // ✅ Optional field
+
         Map<String, Object> issueData = new HashMap<>();
         issueData.put("user_id", userId);
         issueData.put("image_url", imageUrl);
@@ -185,6 +189,8 @@ public class UploadFragment extends Fragment {
         issueData.put("latitude", latitude);
         issueData.put("longitude", longitude);
         issueData.put("timestamp", new Date());
+        issueData.put("status", "Pending");
+        if (!description.isEmpty()) issueData.put("description", description); // ✅ Add only if provided
 
         db.collection("civic_issues")
                 .add(issueData)
@@ -194,6 +200,7 @@ public class UploadFragment extends Fragment {
                     imagePreview.setImageResource(0);
                     imageUri = null;
                     spnIssueType.setSelection(0);
+                    editDescription.setText(""); // ✅ Clear field
                 })
                 .addOnFailureListener(e -> {
                     progressBar.setVisibility(ProgressBar.GONE);
@@ -201,5 +208,4 @@ public class UploadFragment extends Fragment {
                     Toast.makeText(requireContext(), "Error saving data: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
-
 }

@@ -2,12 +2,14 @@
 <resources>
 
     <style name="Theme.NeuroCity" parent="android:Theme.Material.Light.NoActionBar" />
+
     <!-- Base application theme. -->
     <style name="Base.Theme.NeuroCity" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-    <!-- Base application theme. -->
+
+    <!-- Main Application Theme -->
     <style name="Theme.Neurocity" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -21,9 +23,36 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <!-- Base application theme. -->
     <style name="Base.Theme.Neurocity" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
+
+    <!-- Admin Dashboard Theme - Light Mode -->
+    <style name="Theme.Neurocity.AdminDashboard" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/admin_primary</item>
+        <item name="colorPrimaryVariant">@color/admin_primary_variant</item>
+        <item name="colorSecondary">@color/admin_secondary</item>
+        <item name="colorAccent">@color/admin_accent</item>
+
+        <!-- Custom Attributes - Light Mode -->
+        <item name="backgroundColor">@color/background_light</item>
+        <item name="cardBackgroundColor">@color/surface_light</item>
+        <item name="textPrimaryColor">@color/text_primary_light</item>
+        <item name="textSecondaryColor">@color/text_secondary_light</item>
+
+        <!-- Material Components -->
+        <item name="colorSurface">@color/surface_light</item>
+        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+
+        <!-- Status bar color for admin -->
+        <item name="android:statusBarColor">@color/admin_primary_variant</item>
+    </style>
+
 </resources>

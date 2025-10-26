@@ -1,48 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#121212"
-    tools:context=".AdminDashboardActivity">
+    android:background="@color/backgroundColor">
 
-    <LinearLayout
-        android:id="@+id/adminContainer"
-        android:layout_width="0dp"
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/primary_color"
+        android:elevation="4dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary_color"
+            app:title="NeuroCity"
+            app:titleCentered="true"
+            app:titleTextColor="@android:color/white"
+            app:menu="@menu/top_app_bar_menu"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <!-- Title -->
-        <TextView
-            android:id="@+id/tvAdminTitle"
+        <!-- Filter Buttons with Modern Design -->
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Admin Dashboard"
-            android:textColor="@android:color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="24dp" />
+            android:scrollbars="none"
+            android:padding="12dp"
+            android:background="@color/cardBackgroundColor"
+            android:elevation="3dp">
 
-        <!-- Add future admin options here -->
-        <Button
-            android:id="@+id/btnViewUsers"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="All"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="28dp"
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="24dp"
+                    app:backgroundTint="@color/admin_primary" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Pending"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="28dp"
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="24dp"
+                    app:backgroundTint="@color/statusPending" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnInProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="In Progress"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="28dp"
+                    android:layout_marginEnd="8dp"
+                    app:cornerRadius="24dp"
+                    app:backgroundTint="@color/statusInProgress" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnResolved"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:text="Resolved"
+                    android:textSize="14sp"
+                    android:textAllCaps="false"
+                    android:paddingStart="28dp"
+                    android:paddingEnd="28dp"
+                    app:cornerRadius="24dp"
+                    app:backgroundTint="@color/statusResolved" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewIssues"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="View Registered Users"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="12dp"/>
-
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:background="@color/backgroundColor"/>
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

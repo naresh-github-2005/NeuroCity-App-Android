@@ -9,7 +9,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- NeuroCity App Colors - Light Mode -->
+    <!-- 💜 Brand & Accent Colors (Admin Dashboard Theme) -->
+    <color name="admin_primary">#8C9EFF</color> <!-- Vibrant indigo accent -->
+    <color name="admin_primary_variant">#536DFE</color> <!-- Slightly darker tone -->
+    <color name="admin_secondary">#64B5F6</color> <!-- Soft blue secondary accent -->
+    <color name="admin_accent">#FF80AB</color> <!-- Pink accent for highlights -->
+
+    <!-- NeuroCity App Colors - Light Mode (Existing Theme) -->
     <color name="primary_color">#3F51B5</color>
     <color name="primary_dark">#303F9F</color>
     <color name="primary_light">#C5CAE9</color>
@@ -29,4 +35,25 @@
 
     <!-- Material 3 Indicator Color -->
     <color name="m3_indicator_color">@color/purple_500</color>
+
+    <!-- Light Mode Colors (Admin Dashboard) -->
+    <color name="background_light">#F5F7FA</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="text_primary_light">#1A1A1A</color>
+    <color name="text_secondary_light">#666666</color>
+
+    <!-- Night Mode Colors (will go in res/values-night/colors.xml) -->
+    <!-- background_dark, surface_dark, text_primary_dark, text_secondary_dark -->
+
+    <!-- Admin Dashboard Colors for Layout References -->
+    <color name="cardBackgroundColor">@color/surface_light</color>
+    <color name="backgroundColor">@color/background_light</color>
+    <color name="textColorPrimary">@color/text_primary_light</color>
+    <color name="textColorSecondary">@color/text_secondary_light</color>
+    <color name="dividerColor">#E0E0E0</color>
+
+    <!-- Status Colors -->
+    <color name="statusPending">@color/admin_accent</color>
+    <color name="statusInProgress">@color/admin_secondary</color>
+    <color name="statusResolved">@color/admin_primary_variant</color>
 </resources>

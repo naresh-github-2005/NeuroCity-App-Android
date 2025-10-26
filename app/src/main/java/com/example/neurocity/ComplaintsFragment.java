@@ -12,14 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class ComplaintsFragment extends Fragment {
 
@@ -27,6 +25,7 @@ public class ComplaintsFragment extends Fragment {
     private ComplaintsAdapter adapter;
     private List<CivicIssue> issueList;
     private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Nullable
     @Override
@@ -42,25 +41,32 @@ public class ComplaintsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         db = FirebaseFirestore.getInstance();
-        loadComplaints();
+        mAuth = FirebaseAuth.getInstance();
+
+        loadUserComplaints();
 
         return view;
     }
 
-    private void loadComplaints() {
+    private void loadUserComplaints() {
+        String currentUserId = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : null;
+        if (currentUserId == null) return;
+
         db.collection("civic_issues")
-                .orderBy("timestamp")
+                .whereEqualTo("user_id", currentUserId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     issueList.clear();
-
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         String imageUrl = doc.getString("image_url");
                         String issueType = doc.getString("issue_type");
+                        String description = doc.getString("description");
                         Double lat = doc.getDouble("latitude");
                         Double lng = doc.getDouble("longitude");
                         String userId = doc.getString("user_id");
                         Timestamp timestamp = doc.getTimestamp("timestamp");
+                        String status = doc.getString("status");
+
 
                         String formattedDate = "";
                         if (timestamp != null) {
@@ -75,7 +81,9 @@ public class ComplaintsFragment extends Fragment {
                                 lat != null ? lat : 0.0,
                                 lng != null ? lng : 0.0,
                                 formattedDate,
-                                userId != null ? userId : "Unknown"
+                                userId != null ? userId : "Unknown",
+                                description != null ? description : "",
+                                status != null ? status : "Pending"
                         );
 
                         issueList.add(issue);
@@ -83,8 +91,6 @@ public class ComplaintsFragment extends Fragment {
 
                     adapter.notifyDataSetChanged();
                 })
-                .addOnFailureListener(e -> {
-                    e.printStackTrace();
-                });
+                .addOnFailureListener(Throwable::printStackTrace);
     }
 }

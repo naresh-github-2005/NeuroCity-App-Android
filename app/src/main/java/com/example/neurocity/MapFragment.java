@@ -1,8 +1,13 @@
 package com.example.neurocity;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,10 +18,13 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,40 +55,47 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-        loadIssuesFromFirestore();
+
+        // Realtime updates
+        db.collection("civic_issues")
+                .addSnapshotListener((querySnapshot, error) -> {
+                    if (error != null || querySnapshot == null) return;
+
+                    mMap.clear(); // Clear old markers to avoid duplicates
+
+                    // Add markers for each document
+                    for (int i = 0; i < querySnapshot.getDocuments().size(); i++) {
+                        addMarkerFromDoc(querySnapshot.getDocuments().get(i));
+                    }
+                });
     }
 
-    private void loadIssuesFromFirestore() {
-        db.collection("civic_issues")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        Double lat = doc.getDouble("latitude");
-                        Double lng = doc.getDouble("longitude");
-                        String issueType = doc.getString("issue_type");
-                        Date timestamp = doc.getDate("timestamp");
+    private void addMarkerFromDoc(@NonNull com.google.firebase.firestore.DocumentSnapshot doc) {
+        Double lat = doc.getDouble("latitude");
+        Double lng = doc.getDouble("longitude");
+        String issueType = doc.getString("issue_type");
+        String status = doc.getString("status");
+        Date timestamp = doc.getDate("timestamp");
 
-                        if (lat != null && lng != null) {
-                            LatLng location = new LatLng(lat, lng);
+        if (lat != null && lng != null) {
+            LatLng location = new LatLng(lat, lng);
 
-                            String formattedDate = timestamp != null ?
-                                    new SimpleDateFormat("dd MMM yyyy HH:mm", Locale.getDefault()).format(timestamp)
-                                    : "Unknown time";
+            String formattedDate = timestamp != null ?
+                    new SimpleDateFormat("dd MMM yyyy HH:mm", Locale.getDefault()).format(timestamp)
+                    : "Unknown time";
 
-                            mMap.addMarker(new MarkerOptions()
-                                    .position(location)
-                                    .title(issueType)
-                                    .snippet("Reported: " + formattedDate));
+            // Determine marker color based on status
+            float hue = BitmapDescriptorFactory.HUE_RED; // default Pending
+            if ("Pending".equalsIgnoreCase(status)) hue = BitmapDescriptorFactory.HUE_RED;
+            else if ("In Progress".equalsIgnoreCase(status)) hue = BitmapDescriptorFactory.HUE_ORANGE;
+            else if ("Resolved".equalsIgnoreCase(status)) hue = BitmapDescriptorFactory.HUE_GREEN;
 
-                            // Optional: Move camera to first marker
-                            if (queryDocumentSnapshots.getDocuments().indexOf(doc) == 0) {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f));
-                            }
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    // Handle failure
-                });
+            mMap.addMarker(new MarkerOptions()
+                    .position(location)
+                    .title(issueType)
+                    .snippet("Status: " + status + "\nReported: " + formattedDate)
+                    .icon(BitmapDescriptorFactory.defaultMarker(hue))
+            );
+        }
     }
 }

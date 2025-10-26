@@ -2,6 +2,10 @@
 <!-- res/values/styles.xml -->
 <resources>
     <!-- Your existing styles -->
+    <!-- Splash Screen Theme -->
+    <style name="Theme.NeuroCity.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
 
     <style name="App.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView">
     </style>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom theme attributes for day/night mode -->
+    <attr name="backgroundColor" format="color|reference" />
+    <attr name="cardBackgroundColor" format="color|reference" />
+    <attr name="textPrimaryColor" format="color|reference" />
+    <attr name="textSecondaryColor" format="color|reference" />
+</resources>
