@@ -11,6 +11,7 @@ import android.widget.*;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -94,6 +95,19 @@ public class RegisterActivity extends AppCompatActivity {
                                 );
                     } else {
                         Toast.makeText(RegisterActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+    private void saveFcmToken(String uid) {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        String token = task.getResult();
+                        db.collection("users").document(uid)
+                                .update("fcmToken", token)
+                                .addOnSuccessListener(aVoid ->
+                                        Toast.makeText(this, "Device registered for notifications", Toast.LENGTH_SHORT).show())
+                                .addOnFailureListener(e -> {});
                     }
                 });
     }

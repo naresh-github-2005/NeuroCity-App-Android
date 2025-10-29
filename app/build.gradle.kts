@@ -73,6 +73,7 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
     implementation(libs.play.services.location)
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.firebase:firebase-messaging:23.4.1")
 
     implementation("com.github.bumptech.glide:glide:4.15.1")
     kapt("com.github.bumptech.glide:compiler:4.15.1")

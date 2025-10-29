@@ -3,6 +3,7 @@ package com.example.neurocity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,13 +15,14 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.tasks.*;
 import com.google.firebase.auth.*;
 import com.google.firebase.firestore.*;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
 
     EditText editEmail, editPassword;
-    Button btnLogin, btnGoToRegister;
+    Button btnLogin, btnGoToRegister, btnForgotPassword;
     ProgressBar progressBar;
     SignInButton btnGoogleSignIn;
 
@@ -43,12 +45,21 @@ public class LoginActivity extends AppCompatActivity {
         btnGoToRegister = findViewById(R.id.btnGoToRegister);
         progressBar = findViewById(R.id.progressBar);
         btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
+        btnForgotPassword = findViewById(R.id.btnForgotPassword);
 
         // ---------------------------
         // Initialize Firebase
         // ---------------------------
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        // ---------------------------
+        // Auto Login if User Already Signed In
+        // ---------------------------
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            fetchUserRole(currentUser.getUid());
+        }
 
         // ---------------------------
         // Configure Google Sign-In
@@ -80,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             if (user != null) {
                                 fetchUserRole(user.getUid());
+                                saveFcmToken(user.getUid());
                             }
                         } else {
                             Toast.makeText(this, "Auth failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
@@ -101,8 +113,73 @@ public class LoginActivity extends AppCompatActivity {
         btnGoToRegister.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class))
         );
+
+        // ---------------------------
+// Forgot Password
+// ---------------------------
+        btnForgotPassword.setOnClickListener(v -> {
+            // Create a proper EditText with padding and styling
+            EditText resetMail = new EditText(this);
+            resetMail.setHint("Enter your email");
+            resetMail.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+
+            // Add padding to the EditText
+            int padding = (int) (16 * getResources().getDisplayMetrics().density);
+            resetMail.setPadding(padding, padding, padding, padding);
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Reset Password")
+                    .setMessage("Enter your email to receive a password reset link.")
+                    .setView(resetMail)
+                    .setPositiveButton("Send", (dialog, which) -> {
+                        String mail = resetMail.getText().toString().trim(); // Add trim()
+
+                        if (TextUtils.isEmpty(mail)) {
+                            Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        // Validate email format
+                        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+                            Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        // Show progress
+                        progressBar.setVisibility(ProgressBar.VISIBLE);
+
+                        mAuth.sendPasswordResetEmail(mail)
+                                .addOnSuccessListener(unused -> {
+                                    progressBar.setVisibility(ProgressBar.GONE);
+                                    Toast.makeText(this, "Reset link sent to " + mail, Toast.LENGTH_LONG).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    progressBar.setVisibility(ProgressBar.GONE);
+
+                                    // Handle specific error cases
+                                    String errorMessage = "Error sending reset email";
+                                    if (e.getMessage() != null) {
+                                        if (e.getMessage().contains("no user record")) {
+                                            errorMessage = "No account found with this email";
+                                        } else if (e.getMessage().contains("badly formatted")) {
+                                            errorMessage = "Invalid email format";
+                                        } else {
+                                            errorMessage = e.getMessage();
+                                        }
+                                    }
+
+                                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
+                                    android.util.Log.e("ForgotPassword", "Error: " + e.getMessage(), e);
+                                });
+                    })
+                    .setNegativeButton("Cancel", null) // Simpler - auto dismisses
+                    .show(); // Use show() instead of create().show()
+        });
     }
 
+    // ---------------------------
+    // Google Sign-In Result
+    // ---------------------------
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -127,14 +204,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null) {
-                            // Fetch or create user document if it doesn't exist
                             db.collection("users").document(user.getUid())
                                     .get()
                                     .addOnSuccessListener(document -> {
                                         if (document.exists()) {
                                             fetchUserRole(user.getUid());
                                         } else {
-                                            // Default to user role if new Google account
                                             db.collection("users").document(user.getUid())
                                                     .set(new HashMap<String, Object>() {{
                                                         put("email", user.getEmail());
@@ -143,6 +218,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     .addOnSuccessListener(aVoid -> redirectUser("user"));
                                         }
                                     });
+                            saveFcmToken(user.getUid());
                         }
                     } else {
                         Toast.makeText(this, "Google authentication failed", Toast.LENGTH_SHORT).show();
@@ -167,6 +243,20 @@ public class LoginActivity extends AppCompatActivity {
                 );
     }
 
+    // 🔹 Save FCM Token to Firestore for Notifications
+    private void saveFcmToken(String uid) {
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        String token = task.getResult();
+                        db.collection("users").document(uid)
+                                .update("fcmToken", token)
+                                .addOnFailureListener(e -> {});
+                    }
+                });
+    }
+
+    // 🔹 Redirect based on role
     private void redirectUser(String role) {
         if ("official".equalsIgnoreCase(role)) {
             startActivity(new Intent(this, AdminDashboardActivity.class));

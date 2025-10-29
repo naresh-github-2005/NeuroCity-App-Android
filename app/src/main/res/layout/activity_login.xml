@@ -127,6 +127,17 @@
             app:elevation="4dp"
             android:letterSpacing="0.05" />
 
+        <Button
+            android:id="@+id/btnForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password?"
+            android:textColor="@color/teal_700"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
         <!-- Divider with text -->
         <LinearLayout
             android:layout_width="match_parent"

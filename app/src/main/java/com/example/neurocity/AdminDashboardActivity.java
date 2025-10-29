@@ -150,16 +150,26 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     String newStatus = options[which];
 
                     if (issue.getDocId() != null) {
+                        // Add logging
+                        android.util.Log.d("AdminDashboard", "Updating issue: " + issue.getDocId() + " to status: " + newStatus);
+
                         firestore.collection("civic_issues")
                                 .document(issue.getDocId())
-                                .update("status", newStatus)
+                                .update(
+                                        "status", newStatus,
+                                        "status_updated_by", auth.getCurrentUser() != null ? auth.getCurrentUser().getUid() : "unknown",
+                                        "status_updated_at", com.google.firebase.Timestamp.now()
+                                )
                                 .addOnSuccessListener(aVoid -> {
                                     issue.setStatus(newStatus);
                                     adapter.notifyDataSetChanged();
-                                    Toast.makeText(this, "Status updated", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, "Status updated ✅", Toast.LENGTH_SHORT).show();
+                                    android.util.Log.d("AdminDashboard", "Status update successful");
                                 })
-                                .addOnFailureListener(e ->
-                                        Toast.makeText(this, "Failed to update status", Toast.LENGTH_SHORT).show());
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(this, "Failed to update status", Toast.LENGTH_SHORT).show();
+                                    android.util.Log.e("AdminDashboard", "Status update failed", e);
+                                });
                     }
                 })
                 .show();
