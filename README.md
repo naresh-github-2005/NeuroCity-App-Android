@@ -4,7 +4,8 @@
 > **Empowering citizens. Enhancing governance. Building smarter cities.**
 
 <p align="center">
-  <img src="assets/banner.png" alt="NeuroCity Banner" width="800"/>
+  <img width="1333" height="411" alt="image" src="https://github.com/user-attachments/assets/ee7387e9-290b-429e-8d87-dde2f8ff1702" />
+
 </p>
 
 <p align="center">
@@ -131,7 +132,8 @@ It enables people to **report local problems** (like potholes, streetlight failu
 
 ## 🏗️ **Project Architecture**
 
-![img_6.png](img_6.png)
+<img width="1101" height="781" alt="image" src="https://github.com/user-attachments/assets/0750bf21-7e1e-4ce7-8c4a-fab5f2e617fc" />
+
 
 ```
 com.example.neurocity
@@ -164,7 +166,8 @@ com.example.neurocity
 
 ## 🗄️ **Firestore Database Structure**
 
-![img_5.png](img_5.png)
+<img width="793" height="1286" alt="image" src="https://github.com/user-attachments/assets/c265e50d-5aa1-46dd-b435-3470bdf4be23" />
+
 
 ```
 Firestore Root
@@ -204,7 +207,7 @@ Firestore Root
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/your-username/NeuroCity.git
+   git clone https://github.com/Mohammed0Arfath/NeuroCity-App.git
    ```
 
 2. **Open in Android Studio**
@@ -234,10 +237,9 @@ Firestore Root
 ---
 
 ## 🖼️ **Screenshots**
-
-| Splash | Login |       Report Issue       | Admin Dashboard |
-|:------:|:-----:|:------------------------:|:---------------:|
-|    ![img.png](img.png)    |   ![img_1.png](img_1.png)    | ![img_2.png](img_2.png) ![img_3.png](img_3.png) |        ![img_4.png](img_4.png)         |
+<div align="center" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); padding: 20px; border-radius: 20px;">
+  <p align="center"> <em>Experience NeuroCity — from citizen reporting to smart admin management</em> </p> <table align="center"> <tr> <th>🚀 Splash Screen</th> <th>🔐 Login</th> <th>📸 Report Issue</th> <th>🗂️ Admin Dashboard</th> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/3ddf1681-480c-467b-af3d-51be0f3d4d32" alt="Splash Screen" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> <td align="center"> <img src="https://github.com/user-attachments/assets/c4764850-6ab8-4ed7-825c-23939755d152" alt="Login Screen" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> <td align="center"> <img src="https://github.com/user-attachments/assets/e59dcc55-4975-40ea-8a82-155a9e5501d4" alt="Report Issue" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); margin-bottom:10px;"/><br/> <img src="https://github.com/user-attachments/assets/6644a491-d3dd-47ee-a6d3-51c6147e14f4" alt="Report Issue 2" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); margin-bottom:10px;"/><br/> <img src="https://github.com/user-attachments/assets/eb56a483-6899-4d72-9546-13eb77f29fec" alt="Report Issue 3" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> <td align="center"> <img src="https://github.com/user-attachments/assets/de53a264-6d0f-4002-8fab-995f719132b5" alt="Admin Dashboard" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> </tr> </table>
+</div>
 
 ---
 
