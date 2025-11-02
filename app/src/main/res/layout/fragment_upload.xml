@@ -83,10 +83,13 @@
                     android:id="@+id/imagePreview"
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
-                    android:scaleType="centerCrop"
-                    android:background="?android:attr/colorBackground"
+                    android:scaleType="centerInside"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/image_placeholder_background"
                     android:contentDescription="Image preview"
-                    app:cardCornerRadius="12dp"/>
+                    android:src="@drawable/image_placeholder"
+                    android:alpha="0.5"/>
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

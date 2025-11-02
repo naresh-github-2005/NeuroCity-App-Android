@@ -36,9 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // ---------------------------
-        // Initialize Views
-        // ---------------------------
         editEmail = findViewById(R.id.editEmail);
         editPassword = findViewById(R.id.editPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -47,32 +44,20 @@ public class LoginActivity extends AppCompatActivity {
         btnGoogleSignIn = findViewById(R.id.btnGoogleSignIn);
         btnForgotPassword = findViewById(R.id.btnForgotPassword);
 
-        // ---------------------------
-        // Initialize Firebase
-        // ---------------------------
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // ---------------------------
-        // Auto Login if User Already Signed In
-        // ---------------------------
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             fetchUserRole(currentUser.getUid());
         }
 
-        // ---------------------------
-        // Configure Google Sign-In
-        // ---------------------------
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        // ---------------------------
-        // Email/Password Login
-        // ---------------------------
         btnLogin.setOnClickListener(v -> {
             String email = editEmail.getText().toString().trim();
             String password = editPassword.getText().toString().trim();
@@ -99,31 +84,20 @@ public class LoginActivity extends AppCompatActivity {
                     });
         });
 
-        // ---------------------------
-        // Google Sign-In
-        // ---------------------------
         btnGoogleSignIn.setOnClickListener(v -> {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
             startActivityForResult(signInIntent, RC_SIGN_IN);
         });
 
-        // ---------------------------
-        // Navigate to RegisterActivity
-        // ---------------------------
         btnGoToRegister.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class))
         );
 
-        // ---------------------------
-// Forgot Password
-// ---------------------------
+        // Forgot Password
         btnForgotPassword.setOnClickListener(v -> {
-            // Create a proper EditText with padding and styling
             EditText resetMail = new EditText(this);
             resetMail.setHint("Enter your email");
             resetMail.setInputType(android.text.InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-
-            // Add padding to the EditText
             int padding = (int) (16 * getResources().getDisplayMetrics().density);
             resetMail.setPadding(padding, padding, padding, padding);
 
@@ -132,22 +106,16 @@ public class LoginActivity extends AppCompatActivity {
                     .setMessage("Enter your email to receive a password reset link.")
                     .setView(resetMail)
                     .setPositiveButton("Send", (dialog, which) -> {
-                        String mail = resetMail.getText().toString().trim(); // Add trim()
-
+                        String mail = resetMail.getText().toString().trim();
                         if (TextUtils.isEmpty(mail)) {
                             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
                             return;
                         }
-
-                        // Validate email format
                         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
                             Toast.makeText(this, "Please enter a valid email", Toast.LENGTH_SHORT).show();
                             return;
                         }
-
-                        // Show progress
                         progressBar.setVisibility(ProgressBar.VISIBLE);
-
                         mAuth.sendPasswordResetEmail(mail)
                                 .addOnSuccessListener(unused -> {
                                     progressBar.setVisibility(ProgressBar.GONE);
@@ -155,31 +123,14 @@ public class LoginActivity extends AppCompatActivity {
                                 })
                                 .addOnFailureListener(e -> {
                                     progressBar.setVisibility(ProgressBar.GONE);
-
-                                    // Handle specific error cases
-                                    String errorMessage = "Error sending reset email";
-                                    if (e.getMessage() != null) {
-                                        if (e.getMessage().contains("no user record")) {
-                                            errorMessage = "No account found with this email";
-                                        } else if (e.getMessage().contains("badly formatted")) {
-                                            errorMessage = "Invalid email format";
-                                        } else {
-                                            errorMessage = e.getMessage();
-                                        }
-                                    }
-
-                                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show();
-                                    android.util.Log.e("ForgotPassword", "Error: " + e.getMessage(), e);
+                                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                                 });
                     })
-                    .setNegativeButton("Cancel", null) // Simpler - auto dismisses
-                    .show(); // Use show() instead of create().show()
+                    .setNegativeButton("Cancel", null)
+                    .show();
         });
     }
 
-    // ---------------------------
-    // Google Sign-In Result
-    // ---------------------------
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -226,7 +177,6 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    // 🔹 Fetch role from Firestore
     private void fetchUserRole(String uid) {
         db.collection("users").document(uid).get()
                 .addOnSuccessListener(document -> {
@@ -243,7 +193,6 @@ public class LoginActivity extends AppCompatActivity {
                 );
     }
 
-    // 🔹 Save FCM Token to Firestore for Notifications
     private void saveFcmToken(String uid) {
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(task -> {
@@ -256,10 +205,11 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    // 🔹 Redirect based on role
     private void redirectUser(String role) {
         if ("official".equalsIgnoreCase(role)) {
             startActivity(new Intent(this, AdminDashboardActivity.class));
+        } else if ("worker".equalsIgnoreCase(role)) {
+            startActivity(new Intent(this, WorkerDashboardActivity.class));
         } else {
             startActivity(new Intent(this, MainActivity.class));
         }

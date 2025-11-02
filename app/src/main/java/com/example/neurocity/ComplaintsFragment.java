@@ -66,6 +66,11 @@ public class ComplaintsFragment extends Fragment {
                         String userId = doc.getString("user_id");
                         Timestamp timestamp = doc.getTimestamp("timestamp");
                         String status = doc.getString("status");
+                        String department = doc.getString("department");
+                        String assigned_worker_id = doc.getString("assigned_worker_id");
+                        String assigned_worker_name = doc.getString("assigned_worker_name");
+                        String resolved_image_url = doc.getString("resolved_image_url");
+
 
 
                         String formattedDate = "";
@@ -83,8 +88,15 @@ public class ComplaintsFragment extends Fragment {
                                 formattedDate,
                                 userId != null ? userId : "Unknown",
                                 description != null ? description : "",
-                                status != null ? status : "Pending"
+                                status != null ? status : "Pending",
+                                department = "",
+                                assigned_worker_id = "",
+                                assigned_worker_name = "",
+                                resolved_image_url = ""
                         );
+
+                        // Set the document ID
+                        issue.setDocId(doc.getId());
 
                         issueList.add(issue);
                     }

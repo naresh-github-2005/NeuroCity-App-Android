@@ -56,4 +56,6 @@
     <color name="statusPending">@color/admin_accent</color>
     <color name="statusInProgress">@color/admin_secondary</color>
     <color name="statusResolved">@color/admin_primary_variant</color>
+
+    <color name="mapButtonColor">#009688</color>
 </resources>

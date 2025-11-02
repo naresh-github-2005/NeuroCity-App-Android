@@ -1,10 +1,11 @@
 package com.example.neurocity;
 
-import android.app.MediaRouteButton;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -75,6 +76,13 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Vi
                 .load(issue.getImage_url())
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.ivIssue);
+
+        // Track button click listener
+        holder.btnTrack.setOnClickListener(v -> {
+            Intent intent = new Intent(context, IssueTrackingActivity.class);
+            intent.putExtra("issue_id", issue.getDocId());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -86,6 +94,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Vi
         public TextView tvStatus;
         ImageView ivIssue;
         TextView tvType, tvLocation, tvTimestamp, tvDescription;
+        Button btnTrack;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,6 +104,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Vi
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvStatus = itemView.findViewById(R.id.tvStatus);
+            btnTrack = itemView.findViewById(R.id.btnTrack);
         }
     }
 }

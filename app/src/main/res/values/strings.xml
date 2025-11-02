@@ -8,6 +8,15 @@
     <string name="default_web_client_id">171430606445-b06orlm4gfkac1ho0megsrabqnu1b18f.apps.googleusercontent.com</string>
     <string name="issue_image_desc">Issue image</string>
 
+    <string name="back_button">Back Button</string>
+    <string name="reported_image">Reported Issue Image</string>
+    <string name="resolved_image">Resolved Issue Image</string>
+
+    <!-- Complaint Card -->
+    <string name="issue_icon">Issue Type Icon</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="time_icon">Time Icon</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

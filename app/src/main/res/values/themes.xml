@@ -53,6 +53,10 @@
 
         <!-- Status bar color for admin -->
         <item name="android:statusBarColor">@color/admin_primary_variant</item>
+
+        <item name="android:popupMenuStyle">@style/AppPopupMenu</item>
+        <item name="popupMenuStyle">@style/AppPopupMenu</item>
+
     </style>
 
 </resources>

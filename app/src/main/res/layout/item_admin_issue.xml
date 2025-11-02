@@ -4,126 +4,161 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
+    app:cardElevation="5dp"
     app:cardBackgroundColor="@color/cardBackgroundColor"
     app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="14dp">
 
-        <!-- Image Container -->
-        <FrameLayout
+        <!-- 🖼️ Issue Image -->
+        <ImageView
+            android:id="@+id/imgIssue"
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/placeholder_bg"
+            android:contentDescription="@string/issue_image_desc"
+            android:adjustViewBounds="true"/>
 
-            <ImageView
-                android:id="@+id/issueImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                android:contentDescription="@string/issue_image_desc"/>
-        </FrameLayout>
+        <!-- 📛 Issue Type -->
+        <TextView
+            android:id="@+id/txtIssueType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Issue Type"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/textColorPrimary"
+            android:layout_marginTop="10dp"/>
 
-        <!-- Content Section -->
+        <!-- 📝 Issue Description -->
+        <TextView
+            android:id="@+id/txtIssueDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Issue description will appear here"
+            android:textSize="14sp"
+            android:textColor="@color/textColorSecondary"
+            android:layout_marginTop="6dp"
+            android:maxLines="2"
+            android:ellipsize="end"/>
+
+        <!-- 🏢 Department -->
+        <TextView
+            android:id="@+id/txtDept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dept: Water Supply"
+            android:textSize="14sp"
+            android:textColor="@color/textColorSecondary"
+            android:layout_marginTop="4dp"/>
+
+        <!-- 👷 Assigned Worker -->
+        <TextView
+            android:id="@+id/txtAssigned"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Assigned to: -"
+            android:textSize="14sp"
+            android:textColor="@color/statusInProgress"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"/>
+
+        <!-- 🟢 Status -->
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: Pending"
+            android:textSize="14sp"
+            android:textColor="@color/statusPending"
+            android:layout_marginTop="4dp"/>
+
+        <!-- ⏰ Reported Time -->
+        <TextView
+            android:id="@+id/txtReportedTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reported: -"
+            android:textSize="13sp"
+            android:textColor="@color/textColorSecondary"
+            android:layout_marginTop="4dp"/>
+
+        <!-- ⚙️ Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginTop="12dp">
 
-            <!-- Issue Type -->
+            <!-- First Row: View Map & Assign Worker -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="8dp">
+                android:gravity="end">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@android:drawable/ic_menu_report_image"
-                    android:tint="@color/admin_primary"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:id="@+id/issueType"
-                    android:layout_width="0dp"
+                <!-- View Map -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnViewMap"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/textColorPrimary"
-                    android:text="Issue Type" />
+                    android:text="View Map"
+                    android:textAllCaps="false"
+                    app:cornerRadius="24dp"
+                    app:icon="@drawable/ic_location_pin"
+                    app:iconPadding="6dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    app:backgroundTint="@color/mapButtonColor"
+                    android:textColor="@android:color/white"
+                    android:layout_marginEnd="8dp"/>
+
+                <!-- Assign Worker -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAssignWorker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Assign"
+                    android:textAllCaps="false"
+                    app:cornerRadius="24dp"
+                    app:icon="@drawable/ic_worker"
+                    app:iconPadding="6dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    app:backgroundTint="@color/statusInProgress"
+                    android:textColor="@android:color/white"/>
             </LinearLayout>
 
-            <!-- Description -->
-            <TextView
-                android:id="@+id/issueDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/textColorSecondary"
-                android:lineSpacingExtra="2dp"
-                android:maxLines="3"
-                android:ellipsize="end"
-                android:layout_marginBottom="12dp"
-                android:text="Issue description will appear here" />
-
-            <!-- Divider -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/dividerColor"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Status Section -->
+            <!-- Second Row: Update Status -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:gravity="end"
+                android:layout_marginTop="8dp">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@android:drawable/ic_menu_info_details"
-                    android:tint="@color/admin_secondary"
-                    android:layout_marginEnd="6dp" />
-
-                <TextView
-                    android:id="@+id/issueStatus"
-                    android:layout_width="0dp"
+                <!-- Update Status -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnUpdateStatus"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="13sp"
-                    android:textColor="@color/textColorSecondary"
-                    android:lineSpacingExtra="2dp"
-                    android:text="Status: Pending\nReported: 25 Oct 2025" />
+                    android:text="Status"
+                    android:textAllCaps="false"
+                    app:cornerRadius="24dp"
+                    app:icon="@drawable/ic_update"
+                    app:iconPadding="6dp"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="18dp"
+                    app:backgroundTint="@color/admin_primary"
+                    android:textColor="@android:color/white"/>
             </LinearLayout>
-
-            <!-- Action Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnUpdateStatus"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:text="Update Status"
-                android:textSize="15sp"
-                android:textAllCaps="false"
-                android:layout_marginTop="16dp"
-                app:cornerRadius="12dp"
-                app:backgroundTint="@color/admin_primary"
-                app:icon="@android:drawable/ic_menu_edit"
-                app:iconGravity="textStart"
-                app:iconSize="20dp"
-                app:iconTint="@color/white"/>
         </LinearLayout>
-
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>
