@@ -1,17 +1,17 @@
 
-# 🏙️ **NeuroCity – Civic Issue Tracking & Resolution Platform**
+# 🏙️ **NeuroCity – AI-Powered Civic Issue Tracking & Resolution Platform**
 
-> **Empowering citizens. Enhancing governance. Building smarter cities.**
+> **Empowering Citizens. Enhancing Governance. Building Smarter Cities.**
 
 <p align="center">
-  <img width="1333" height="411" alt="image" src="https://github.com/user-attachments/assets/ee7387e9-290b-429e-8d87-dde2f8ff1702" />
-
+  <img width="1333" height="411" alt="NeuroCity Banner" src="https://github.com/user-attachments/assets/ee7387e9-290b-429e-8d87-dde2f8ff1702" />
 </p>
 
 <p align="center">
   <a href="#"><img src="https://img.shields.io/badge/Android-14%2B-green?logo=android&logoColor=white" alt="Android Badge"></a>
   <a href="#"><img src="https://img.shields.io/badge/Java-100%25-blue?logo=openjdk&logoColor=white" alt="Java Badge"></a>
   <a href="#"><img src="https://img.shields.io/badge/Firebase-Backend-orange?logo=firebase&logoColor=white" alt="Firebase Badge"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Google%20Maps-Integrated-blue?logo=googlemaps&logoColor=white" alt="Maps Badge"></a>
   <a href="#"><img src="https://img.shields.io/badge/License-MIT-lightgrey?logo=opensourceinitiative&logoColor=white" alt="License Badge"></a>
 </p>
 
@@ -19,121 +19,147 @@
 
 ## 📘 **Overview**
 
-**NeuroCity** is a next-generation **Civic Issue Tracking and Resolution Android App** that bridges communication between **citizens** and **municipal authorities**.
-It enables people to **report local problems** (like potholes, streetlight failures, or garbage accumulation) directly from their smartphones and allows **authorities** to **monitor, update, and resolve** these reports efficiently.
+**NeuroCity** is an **AI-integrated civic management Android application** that connects **citizens**, **field workers**, and **administrators** on one cloud-powered platform.  
+It enables citizens to **report urban issues**, helps workers **resolve tasks efficiently**, and provides administrators with **real-time oversight** using Firebase’s live synchronization and FCM push notifications.
+
+---
+
+## 🧩 **Problem Statement**
+
+Modern cities face numerous civic issues — from potholes and waste overflow to damaged streetlights — yet most platforms lack:
+- AI-driven classification or prioritization.
+- Real-time updates between citizens, workers, and admins.
+- Role-based dashboards for clarity and accountability.
+
+**NeuroCity** solves this by integrating **Firebase Cloud**, **AI-assisted workflows**, and **role-based access control** in a single mobile solution.
 
 ---
 
 ## 🧭 **Table of Contents**
 
-* [Core Features](#-core-features)
-* [User Roles](#-user-roles)
-* [Application Workflow](#-application-workflow)
-* [Technology Stack](#-technology-stack)
-* [Android Components](#-android-components)
-* [Project Architecture](#-project-architecture)
-* [Firestore Database Structure](#-firestore-database-structure)
-* [Permissions](#-permissions)
-* [Setup & Configuration](#-setup--configuration)
-* [Screenshots](#-screenshots)
-* [Future Enhancements](#-future-enhancements)
-* [Contributors](#-contributors)
-* [License](#-license)
+- [Core Features](#-core-features)
+- [User Roles](#-user-roles)
+- [Application Workflow](#-application-workflow)
+- [Technology Stack](#-technology-stack)
+- [Android Components](#-android-components)
+- [Firebase Integration](#-firebase-integration)
+- [UI/UX Design Principles](#-uiux-design-principles)
+- [Project Architecture](#-project-architecture)
+- [Firestore Database Structure](#-firestore-database-structure)
+- [Permissions](#-permissions)
+- [Setup & Configuration](#-setup--configuration)
+- [Screenshots](#-screenshots)
+- [Future Enhancements](#-future-enhancements)
+- [Contributors](#-contributors)
+- [License](#-license)
 
 ---
 
 ## ⚙️ **Core Features**
 
-| Feature                         | Description                                                                  |
-| ------------------------------- | ---------------------------------------------------------------------------- |
-| 🔐 **Secure Authentication**    | Email/Password-based login & registration using Firebase Authentication.     |
-| 📸 **Smart Issue Reporting**    | Capture or upload images, describe the issue, and geotag the exact location. |
-| 🗺️ **Google Maps Integration** | Interactive maps to view nearby issues and locations.                        |
-| ☁️ **Cloud Firestore Database** | Real-time data synchronization and dynamic issue listing.                    |
-| 📰 **Live Feed**                | Issues automatically update in RecyclerView without app refresh.             |
-| 🧑‍💼 **Admin Dashboard**       | Separate dashboard for admins to manage and update issue statuses.           |
-| 🪶 **Material Design UI**       | Clean and minimal interface following Google Material 3 principles.          |
+| Feature | Description |
+|----------|--------------|
+| 🔐 **Secure Authentication** | Email/Password & Google Sign-In via Firebase Authentication. |
+| 📸 **Smart Issue Reporting** | Capture or upload images, select issue type, and tag GPS location. |
+| 🗺️ **Google Maps Integration** | Interactive civic map with live issue markers. |
+| ☁️ **Cloud Firestore Database** | Real-time issue storage, queries, and snapshot listeners. |
+| 🧠 **Role-Based Dashboards** | Separate UI flows for Citizen, Worker, and Admin users. |
+| 🔔 **Push Notifications** | FCM-powered real-time updates (e.g., issue assigned/resolved). |
+| 🎨 **Material Design UI** | Minimal, consistent interface following Material 3 principles. |
+| 🌗 **Theme Preferences** | Light, Dark, or System Default modes with persistent settings. |
 
 ---
 
 ## 👥 **User Roles**
 
-| Role                    | Description                                                                     |
-| ----------------------- | ------------------------------------------------------------------------------- |
-| 👤 **Citizen User**     | Register, log in, report issues, view feed and map, track issue status.         |
-| 🧑‍💼 **Administrator** | View all reported issues, update statuses (Pending → Resolved), manage reports. |
+| Role | Description |
+|------|--------------|
+| 👤 **Citizen** | Reports civic issues, uploads photos, views status, and tracks progress. |
+| 👷 **Worker** | Accesses assigned issues, uploads resolution photos, and generates routes via Google Maps. |
+| 🧑‍💼 **Admin** | Monitors all issues, filters by status, assigns workers, and updates progress in real time. |
 
 ---
 
 ## 🔄 **Application Workflow**
 
 1. **Splash & Authentication**
+   - Launches from `SplashActivity`
+   - Redirects to `LoginActivity` or `RegisterActivity` (auto-login enabled)
 
-    * Starts at `SplashActivity`
-    * Directs to `LoginActivity` or `RegisterActivity`
-2. **Main Interface (Citizen)**
+2. **Citizen Flow**
+   - `MainActivity` hosts `UploadFragment`, `MapFragment`, `ComplaintsFragment`
+   - Citizens can report new issues, view existing ones, and track progress
 
-    * `BottomNavigationView` → `ComplaintsFragment`, `UploadFragment`, `MapFragment`
-3. **Admin Flow**
+3. **Worker Flow**
+   - `WorkerDashboardActivity` lists assigned issues
+   - Workers can upload resolution photos and generate optimized routes
 
-    * Role verified via Firebase (based on admin email)
-    * Redirected to `AdminDashboardActivity`
-4. **Real-time Sync**
+4. **Admin Flow**
+   - `AdminDashboardActivity` shows all civic issues in real time
+   - Admins can filter, assign, and update statuses instantly
 
-    * All issues, updates, and images sync with Firestore instantly
+5. **Notification Flow**
+   - FCM sends targeted notifications for updates and assignments
 
 ---
 
 ## 🧰 **Technology Stack**
 
-| Layer               | Technology Used                        |
-| ------------------- | -------------------------------------- |
-| **Language**        | Java                                   |
-| **UI & Layouts**    | XML + Material Design Components       |
-| **Database**        | Firebase Firestore                     |
-| **Authentication**  | Firebase Auth (Email/Password)         |
-| **Storage**         | Firebase Storage                       |
-| **Maps & Location** | Google Maps SDK, FusedLocationProvider |
-| **Image Handling**  | Glide                                  |
-| **Navigation**      | Android Navigation Component           |
-| **View Binding**    | Enabled for type-safe view access      |
-| **Version Control** | Git & GitHub                           |
-| **Build System**    | Gradle                                 |
+| Layer | Technology Used |
+|--------|-----------------|
+| **Frontend** | Android (Java + XML) |
+| **Backend** | Firebase (Firestore, Auth, Storage, Cloud Messaging) |
+| **UI Design** | Material Design 3 |
+| **Location Services** | Google Maps SDK + FusedLocationProvider |
+| **Image Handling** | Glide |
+| **Architecture** | MVVM + Single Activity (with Fragments) |
+| **Build System** | Gradle |
+| **Version Control** | Git & GitHub |
 
 ---
 
 ## 🧱 **Android Components**
 
-| Component                         | Type           | Purpose                                                         |
-| --------------------------------- | -------------- | --------------------------------------------------------------- |
-| **RecyclerView**                  | UI Widget      | Displays list of issues dynamically.                            |
-| **CardView**                      | UI Widget      | Visual card for each issue (image, title, description, status). |
-| **ImageView**                     | UI Widget      | Shows uploaded issue photo.                                     |
-| **TextView**                      | UI Widget      | Displays titles, issue descriptions, status, and location.      |
-| **EditText**                      | UI Widget      | Accepts user input (issue title, description, etc.).            |
-| **Button**                        | UI Widget      | Handles actions like Submit, Login, Register, Upload.           |
-| **FloatingActionButton**          | UI Widget      | Quick access to report a new issue (optional).                  |
-| **ProgressBar**                   | UI Widget      | Indicates loading states (upload, authentication).              |
-| **BottomNavigationView**          | Navigation     | Switches between fragments (Complaints, Upload, Map).           |
-| **Fragment**                      | UI Module      | Modular screens within MainActivity.                            |
-| **ConstraintLayout**              | Layout         | Defines structured UI layout with flexible positioning.         |
-| **LinearLayout / RelativeLayout** | Layout         | Used for nested structure and orientation of child views.       |
-| **Toolbar / AppBarLayout**        | UI Element     | Displays title and action icons at top.                         |
-| **ViewBinding**                   | Utility        | Safely binds XML views to Java code.                            |
-| **Intent / Bundle**               | Core Component | Transfers data between Activities.                              |
-| **SharedPreferences**             | Storage        | Caches login or local configuration data.                       |
-| **FirebaseAuth**                  | API            | Handles user login and registration.                            |
-| **FirebaseFirestore**             | API            | Stores and retrieves civic issue data in real time.             |
-| **FirebaseStorage**               | API            | Stores uploaded images.                                         |
-| **FusedLocationProviderClient**   | API            | Gets device GPS coordinates.                                    |
-| **Glide**                         | Library        | Loads and caches images efficiently.                            |
+| Component | Type | Function |
+|------------|-------|-----------|
+| `RecyclerView`, `CardView` | UI Widgets | Display civic issues dynamically. |
+| `TextInputLayout`, `MaterialButton`, `ProgressBar` | Input & Feedback | Handle user input and state changes. |
+| `BottomNavigationView` | Navigation | Switches between core fragments. |
+| `Fragment` | Module | Modular views for Upload, Map, and Complaints. |
+| `FirebaseAuth`, `FirebaseFirestore`, `FirebaseStorage` | API | Authentication, Data, and Media storage. |
+| `SharedPreferences` | Local Storage | Save user preferences (theme, login). |
+| `FloatingActionButton` | Action | Quick route generation (Worker). |
+| `NotificationManager` | System Service | Builds and displays FCM notifications. |
+
+---
+
+## ☁️ **Firebase Integration**
+
+| Service | Purpose |
+|----------|----------|
+| **Firebase Authentication** | User login, registration, and Google Sign-In. |
+| **Cloud Firestore** | Stores user profiles, issues, and role data in real time. |
+| **Firebase Storage** | Uploads and retrieves issue and resolution images. |
+| **Firebase Cloud Messaging (FCM)** | Sends notifications for issue updates and worker assignments. |
+| **Realtime Snapshot Listeners** | Sync UI with Firestore data changes instantly. |
+
+---
+
+## 🎨 **UI/UX Design Principles**
+
+| Principle | Implementation |
+|------------|----------------|
+| **Consistency** | Shared Material Design components across all screens. |
+| **Clarity** | Inline validation, helper texts, and progress bars. |
+| **Feedback** | Toasts, snackbars, and real-time state color updates. |
+| **User Control** | Role-based navigation and easy logout or theme control. |
+| **Relevance** | Worker and Admin see only assigned or authorized data. |
+| **Accessibility** | ScrollViews, large buttons, and adaptive layouts. |
+| **Personalization** | Light/Dark/System mode saved using `SharedPreferences`. |
 
 ---
 
 ## 🏗️ **Project Architecture**
-
-<img width="1101" height="781" alt="image" src="https://github.com/user-attachments/assets/0750bf21-7e1e-4ce7-8c4a-fab5f2e617fc" />
-
 
 ```
 com.example.neurocity
@@ -144,53 +170,53 @@ com.example.neurocity
 │   ├── RegisterActivity.java
 │   ├── MainActivity.java
 │   ├── AdminDashboardActivity.java
+│   ├── WorkerDashboardActivity.java
 │   └── SettingsActivity.java
 │
 ├── fragments/
-│   ├── ComplaintsFragment.java
 │   ├── UploadFragment.java
-│   └── MapFragment.java
+│   ├── MapFragment.java
+│   ├── ComplaintsFragment.java
 │
 ├── adapters/
-│   ├── ComplaintsAdapter.java
-│   └── AdminIssuesAdapter.java
+│   ├── AdminIssuesAdapter.java
+│   ├── WorkerIssuesAdapter.java
+│   └── ComplaintsAdapter.java
 │
 ├── models/
 │   └── CivicIssue.java
 │
-└── utils/
-    └── FirebaseUtils.java
+└── services/
+└── MyFirebaseMessagingService.java
+
 ```
 
 ---
 
 ## 🗄️ **Firestore Database Structure**
 
-<img width="793" height="1286" alt="image" src="https://github.com/user-attachments/assets/c265e50d-5aa1-46dd-b435-3470bdf4be23" />
-
-
 ```
+
 Firestore Root
 │
 └── Collection: civic_issues
-    ├── Document ID: <auto-generated>
-    │   ├── title: "Pothole near School"
-    │   ├── description: "Large pothole blocking road"
-    │   ├── imageUrl: "https://firebasestorage.googleapis.com/..."
-    │   ├── latitude: 19.12345
-    │   ├── longitude: 72.54321
-    │   ├── reporterEmail: "user@example.com"
-    │   ├── timestamp: <server_timestamp>
-    │   ├── status: "Pending" // or "In Progress", "Resolved"
-    │   └── adminComment: "Resolved by Public Works Dept"
-    │
-    ├── Document ID: <auto-generated>
-    │   └── ...
+├── Document ID: <auto-generated>
+│   ├── title: "Pothole near School"
+│   ├── description: "Large pothole blocking road"
+│   ├── image_url: "[https://firebasestorage.googleapis.com/](https://firebasestorage.googleapis.com/)..."
+│   ├── latitude: 19.12345
+│   ├── longitude: 72.54321
+│   ├── user_id: "uid123"
+│   ├── status: "Pending"
+│   ├── assigned_worker_name: "John"
+│   ├── resolved_image_url: ""
+│   └── timestamp: <server_timestamp>
+
 ```
 
 ---
 
-## 🔒 **Permissions**
+## 🛡️ **Permissions**
 
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
@@ -198,7 +224,7 @@ Firestore Root
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-```
+````
 
 ---
 
@@ -210,19 +236,17 @@ Firestore Root
    git clone https://github.com/Mohammed0Arfath/NeuroCity-App.git
    ```
 
-2. **Open in Android Studio**
+2. **Add Firebase Config**
 
-3. **Firebase Setup**
+   * Place your `google-services.json` inside `/app`
+   * Enable:
 
-    * Add your Android app (`com.example.neurocity`)
-    * Download and place `google-services.json` in `/app`
-    * Enable:
+     * Authentication (Email/Password)
+     * Firestore Database
+     * Storage
+     * Cloud Messaging
 
-        * 🔑 Authentication → Email/Password
-        * 🔥 Firestore Database
-        * 📦 Storage
-
-4. **Google Maps API Key**
+3. **Add Google Maps API Key**
 
    ```xml
    <meta-data
@@ -230,34 +254,56 @@ Firestore Root
        android:value="YOUR_API_KEY_HERE" />
    ```
 
-5. **Run the App**
+4. **Build & Run**
 
-    * Sync Gradle → Run on Emulator or Device
+   * Sync Gradle and launch on emulator/device.
 
 ---
 
 ## 🖼️ **Screenshots**
-<div align="center" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); padding: 20px; border-radius: 20px;">
-  <p align="center"> <em>Experience NeuroCity — from citizen reporting to smart admin management</em> </p> <table align="center"> <tr> <th>🚀 Splash Screen</th> <th>🔐 Login</th> <th>📸 Report Issue</th> <th>🗂️ Admin Dashboard</th> </tr> <tr> <td align="center"> <img src="https://github.com/user-attachments/assets/3ddf1681-480c-467b-af3d-51be0f3d4d32" alt="Splash Screen" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> <td align="center"> <img src="https://github.com/user-attachments/assets/c4764850-6ab8-4ed7-825c-23939755d152" alt="Login Screen" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> <td align="center"> <img src="https://github.com/user-attachments/assets/e59dcc55-4975-40ea-8a82-155a9e5501d4" alt="Report Issue" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); margin-bottom:10px;"/><br/> <img src="https://github.com/user-attachments/assets/6644a491-d3dd-47ee-a6d3-51c6147e14f4" alt="Report Issue 2" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); margin-bottom:10px;"/><br/> <img src="https://github.com/user-attachments/assets/eb56a483-6899-4d72-9546-13eb77f29fec" alt="Report Issue 3" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> <td align="center"> <img src="https://github.com/user-attachments/assets/de53a264-6d0f-4002-8fab-995f719132b5" alt="Admin Dashboard" width="230" style="border-radius:15px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);"/> </td> </tr> </table>
-</div>
+
+<p align="center"><em>Experience NeuroCity – Smart Civic Collaboration in Action</em></p>
+
+### 🚀 **Splash & Authentication**
+
+| Splash                  | Login                   | Register                |
+| ----------------------- | ----------------------- | ----------------------- |
+| *(Add screenshot here)* | *(Add screenshot here)* | *(Add screenshot here)* |
+
+### 👤 **Citizen Side**
+
+| Report Issue                      | Track Issue                              | View Map                       |
+| --------------------------------- | ---------------------------------------- | ------------------------------ |
+| *(Add UploadFragment screenshot)* | *(Add IssueTrackingActivity screenshot)* | *(Add MapFragment screenshot)* |
+
+### 👷 **Worker Side**
+
+| Worker Dashboard                           | Upload Resolved Image                | Route Generation             |
+| ------------------------------------------ | ------------------------------------ | ---------------------------- |
+| *(Add WorkerDashboardActivity screenshot)* | *(Add Worker Issue card screenshot)* | *(Add Route FAB screenshot)* |
+
+### 🧑‍💼 **Admin Side**
+
+| Admin Dashboard                    | Status Filter                     | Issue Management                 |
+| ---------------------------------- | --------------------------------- | -------------------------------- |
+| *(Add Admin Dashboard screenshot)* | *(Add Filter Buttons screenshot)* | *(Add Status Dialog screenshot)* |
 
 ---
 
 ## 🚀 **Future Enhancements**
 
-* 🟢 **Status Updates:** Admins update issue lifecycle.
-* 🔔 **Push Notifications:** Notify users when issue status changes.
-* 👤 **User Profiles:** View report history.
-* 📊 **Analytics Dashboard:** Visualize civic data.
-* 📶 **Offline Mode:** Local caching for low-connectivity areas.
-* 🗂️ **Advanced Filtering:** Filter by category, date, or status.
+* 🤖 **AI-Powered Classification:** Auto-tag issue type using computer vision.
+* 🔔 **Push Notifications:** Real-time updates for citizens and workers.
+* 📊 **Analytics Dashboard:** Visualize issue density and resolution metrics.
+* 🗂️ **Advanced Filters:** Sort by area, category, or severity.
+* 📶 **Offline Mode:** Local caching for low-connectivity regions.
 
 ---
 
 ## 👨‍💻 **Contributors**
 
 | Name                  | Contact                                                                               |
-|-----------------------|---------------------------------------------------------------------------------------|
+| --------------------- | ------------------------------------------------------------------------------------- |
 | **Mohammed Arfath R** | [mohammedarfath.r2022@vitstudent.ac.in](mailto:mohammedarfath.r2022@vitstudent.ac.in) |
 | **Naresh R**          | [naresh.r2022a@vitstudent.ac.in](mailto:naresh.r2022a@vitstudent.ac.in)               |
 | **Mohammad Yusuf**    | [mohammadyusuf.ka2022@vitstudent.ac.in](mailto:mohammadyusuf.ka2022@vitstudent.ac.in) |
@@ -267,12 +313,10 @@ Firestore Root
 ## 📜 **License**
 
 Licensed under the **MIT License**.
-See the [LICENSE](LICENSE) file for full text.
+See the [LICENSE](LICENSE) file for more details.
 
 ---
 
 ## 💡 **Project Vision**
 
-> *NeuroCity* aims to revolutionize civic engagement through **data-driven smart governance**, enabling every citizen to contribute towards building cleaner, safer, and smarter cities.
-
----
+> *NeuroCity* redefines civic engagement through **AI-driven issue tracking**, **real-time collaboration**, and **transparent governance**, empowering every citizen to help build cleaner, smarter cities.
