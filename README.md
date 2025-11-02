@@ -213,7 +213,7 @@ com.example.neurocity
 
 ## 🗄️ **Firestore Database Structure**
 
-<img width="2061" height="2998" alt="Untitled diagram-2025-11-02-144349" src="https://github.com/user-attachments/assets/a1203d9f-1213-4545-a37a-426564e06373" />
+<img width="1030" height="1499" alt="Untitled diagram-2025-11-02-144349" src="https://github.com/user-attachments/assets/a1203d9f-1213-4545-a37a-426564e06373" />
 
 
 ```
