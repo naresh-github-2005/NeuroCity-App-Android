@@ -12,62 +12,42 @@ exports.sendIssueStatusNotification = onDocumentUpdated(
     const newData = event.data.after.data();
     const prevData = event.data.before.data();
 
-    console.log("🔔 Status change detected");
-    console.log("Previous status:", prevData?.status);
-    console.log("New status:", newData?.status);
-
-    // Check if status actually changed
-    if (!newData || newData.status === prevData?.status) {
-      console.log("❌ No status change detected");
-      return;
-    }
+    if (!newData || newData.status === prevData?.status) return;
 
     const userId = newData.user_id;
-    
-    if (!userId) {
-      console.log("❌ No user_id found in document");
-      return;
-    }
-
-    console.log("📱 Looking up user:", userId);
+    if (!userId) return;
 
     const userSnap = await admin.firestore().collection("users").doc(userId).get();
-    
-    if (!userSnap.exists) {
-      console.log("❌ User document not found");
-      return;
-    }
+    if (!userSnap.exists) return;
 
     const token = userSnap.data().fcmToken;
-    
-    if (!token) {
-      console.log("❌ No FCM token found for user");
-      return;
-    }
+    if (!token) return;
 
-    console.log("✅ FCM Token found, sending notification to USER");
-
-    // Custom messages based on status
-    let notificationBody = "";
+    // Custom message
+    let body = "";
     switch (newData.status) {
       case "Assigned":
-        notificationBody = `Your ${newData.issue_type} issue has been assigned to ${newData.assigned_worker_name || "a worker"}.`;
+        body = `Your ${newData.issue_type} issue has been assigned to ${newData.assigned_worker_name || "a worker"}.`;
         break;
       case "In Progress":
-        notificationBody = `Work has started on your ${newData.issue_type} issue.`;
+        body = `Work has started on your ${newData.issue_type} issue.`;
         break;
       case "Resolved":
-        notificationBody = `Great news! Your ${newData.issue_type} issue has been resolved.`;
+        body = `Great news! Your ${newData.issue_type} issue has been resolved.`;
         break;
       default:
-        notificationBody = `Your issue status is now: ${newData.status}`;
+        body = `Your issue status is now: ${newData.status}`;
     }
 
     const message = {
       token,
+      notification: {
+        title: "📢 Issue Status Updated",
+        body,
+      },
       data: {
         title: "📢 Issue Status Updated",
-        body: notificationBody,
+        body,
         issueId: event.params.issueId,
         status: newData.status,
         type: "status_update",
@@ -78,16 +58,16 @@ exports.sendIssueStatusNotification = onDocumentUpdated(
         notification: {
           channelId: "issue_updates",
           sound: "default",
-          color: "#4CAF50"
-        }
-      }
+          color: "#4CAF50",
+        },
+      },
     };
 
     try {
-      const response = await admin.messaging().send(message);
-      console.log("✅ Notification sent successfully to USER:", response);
-    } catch (error) {
-      console.error("❌ Error sending notification:", error);
+      const res = await admin.messaging().send(message);
+      console.log("✅ USER notification sent:", res);
+    } catch (err) {
+      console.error("❌ Error sending USER notification:", err);
     }
   }
 );
@@ -101,44 +81,32 @@ exports.notifyWorkerOnAssignment = onDocumentUpdated(
     const newData = event.data.after.data();
     const prevData = event.data.before.data();
 
-    console.log("👷 Checking worker assignment");
-    console.log("Previous worker:", prevData?.assigned_worker_id);
-    console.log("New worker:", newData?.assigned_worker_id);
-
-    // Check if worker was just assigned (didn't have one before, or changed)
-    if (!newData?.assigned_worker_id || 
-        newData.assigned_worker_id === prevData?.assigned_worker_id) {
-      console.log("❌ No new worker assignment detected");
+    if (
+      !newData?.assigned_worker_id ||
+      newData.assigned_worker_id === prevData?.assigned_worker_id
+    ) {
       return;
     }
 
     const workerId = newData.assigned_worker_id;
-    
-    console.log("📱 Looking up worker:", workerId);
-
-    // Get worker's FCM token from users or workers collection
-    // Adjust collection name based on your structure
     const workerSnap = await admin.firestore().collection("users").doc(workerId).get();
-    
-    if (!workerSnap.exists) {
-      console.log("❌ Worker document not found");
-      return;
-    }
+    if (!workerSnap.exists) return;
 
     const token = workerSnap.data().fcmToken;
-    
-    if (!token) {
-      console.log("❌ No FCM token found for worker");
-      return;
-    }
+    if (!token) return;
 
-    console.log("✅ FCM Token found, sending notification to WORKER");
+    const title = "🔔 New Issue Assigned";
+    const body = `You have been assigned a ${newData.issue_type} issue in ${newData.department || "your department"}.`;
 
     const message = {
       token,
+      notification: {
+        title,
+        body,
+      },
       data: {
-        title: "🔔 New Issue Assigned",
-        body: `You have been assigned a ${newData.issue_type} issue in ${newData.department || "your department"}.`,
+        title,
+        body,
         issueId: event.params.issueId,
         issueType: newData.issue_type || "",
         department: newData.department || "",
@@ -153,17 +121,16 @@ exports.notifyWorkerOnAssignment = onDocumentUpdated(
           channelId: "worker_assignments",
           sound: "default",
           color: "#FF9800",
-          tag: event.params.issueId
-        }
-      }
+          tag: event.params.issueId,
+        },
+      },
     };
 
-
     try {
-      const response = await admin.messaging().send(message);
-      console.log("✅ Notification sent successfully to WORKER:", response);
-    } catch (error) {
-      console.error("❌ Error sending notification:", error);
+      const res = await admin.messaging().send(message);
+      console.log("✅ WORKER notification sent:", res);
+    } catch (err) {
+      console.error("❌ Error sending WORKER notification:", err);
     }
   }
 );

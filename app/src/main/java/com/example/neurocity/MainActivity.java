@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private void showAboutDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("About NeuroCity")
-                .setMessage("NeuroCity v1.0\n\nA civic engagement platform for reporting and tracking community issues.\n\n👨‍💻 Developed by:\nArfath, Naresh, and Yusuf\n\n© 2024 NeuroCity. All rights reserved.")
+                .setMessage("NeuroCity v1.0\n\nA civic engagement platform for reporting and tracking community issues.\n\n👨‍💻 Developed by:\nArfath, Naresh, and Yusuf\n\n© 2025 NeuroCity. All rights reserved.")
                 .setPositiveButton("OK", null)
                 .setNeutralButton("Rate App", (dialog, which) -> {
                     try {

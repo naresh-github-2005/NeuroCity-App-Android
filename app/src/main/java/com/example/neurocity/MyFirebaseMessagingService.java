@@ -128,6 +128,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     channelName = "General Notifications";
             }
 
+            if (title == null || title.isEmpty()) title = "NeuroCity";
+            if (messageBody == null || messageBody.isEmpty()) messageBody = "You have a new update.";
+
             NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
             channel.setDescription("Notifications for " + channelName);
             channel.setSound(sound, null);
