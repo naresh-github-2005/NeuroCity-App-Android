@@ -89,17 +89,33 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
 2. **Citizen Flow**
    - `MainActivity` hosts `UploadFragment`, `MapFragment`, `ComplaintsFragment`
    - Citizens can report new issues, view existing ones, and track progress
+  
+    <img width="519" height="907" alt="Untitled diagram-2025-11-02-145107" src="https://github.com/user-attachments/assets/81598b5f-2a6b-4a65-bddb-593b5660f411" />
+
+
 
 3. **Worker Flow**
    - `WorkerDashboardActivity` lists assigned issues
    - Workers can upload resolution photos and generate optimized routes
+     
+<img width="248" height="1139" alt="Untitled diagram-2025-11-02-144748" src="https://github.com/user-attachments/assets/396b29de-f60c-4277-a6ac-1a54008999d9" />
+
+
 
 4. **Admin Flow**
    - `AdminDashboardActivity` shows all civic issues in real time
    - Admins can filter, assign, and update statuses instantly
 
+  <img width="554" height="907" alt="Untitled diagram-2025-11-02-145004" src="https://github.com/user-attachments/assets/460cd765-07cb-4552-beaf-f74da0bfef05" />
+
+
+
 5. **Notification Flow**
    - FCM sends targeted notifications for updates and assignments
+  
+  <img width="1037" height="183" alt="Untitled diagram-2025-11-02-144554" src="https://github.com/user-attachments/assets/4edcbf89-4ee5-4ff4-8b21-feb3c70d754a" />
+
+
 
 ---
 
@@ -161,6 +177,8 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
 
 ## 🏗️ **Project Architecture**
 
+<img width="688" height="1189" alt="class_diagram" src="https://github.com/user-attachments/assets/eeee79ba-ea4d-421b-9bdf-0f30137b909f" />
+
 ```
 com.example.neurocity
 │
@@ -194,6 +212,9 @@ com.example.neurocity
 ---
 
 ## 🗄️ **Firestore Database Structure**
+
+<img width="1030" height="1499" alt="Untitled diagram-2025-11-02-144349" src="https://github.com/user-attachments/assets/a1203d9f-1213-4545-a37a-426564e06373" />
+
 
 ```
 
