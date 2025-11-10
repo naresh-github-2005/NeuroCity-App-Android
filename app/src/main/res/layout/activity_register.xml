@@ -152,15 +152,15 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height_lg"
             android:text="Register"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_md"
             android:textStyle="bold"
-            android:backgroundTint="@color/primary_color"
-            app:cornerRadius="12dp"
-            app:elevation="4dp"
-            android:letterSpacing="0.05" />
+            android:background="@drawable/button_gradient_primary"
+            app:cornerRadius="@dimen/radius_md"
+            android:letterSpacing="0.05"
+            android:stateListAnimator="@null" />
 
         <!-- Divider with text -->
         <LinearLayout
@@ -199,16 +199,17 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoToLogin"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/button_height_lg"
             android:text="Go to Login"
             android:textColor="@color/primary_color"
-            android:textSize="15sp"
+            android:textSize="@dimen/text_md"
             android:textStyle="bold"
             android:backgroundTint="@color/secondary_button_bg"
-            app:cornerRadius="12dp"
+            app:cornerRadius="@dimen/radius_md"
             app:strokeColor="@color/primary_color"
-            app:strokeWidth="1dp"
-            android:letterSpacing="0.05" />
+            app:strokeWidth="2dp"
+            android:letterSpacing="0.05"
+            android:stateListAnimator="@null" />
 
         <!-- Bottom spacer -->
         <View

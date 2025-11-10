@@ -11,7 +11,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
+        android:elevation="@dimen/elevation_sm"
         android:background="@color/primary_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
             app:titleTextColor="@android:color/white"
             app:menu="@menu/top_app_bar_menu"
             app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary" />
+            style="@style/Widget.App.Toolbar" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -45,11 +45,11 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:background="?attr/colorSurface"
+        android:elevation="@dimen/elevation_md"
+        android:background="@color/cardBackgroundColor"
         app:itemIconTint="@color/bottom_nav_icon_color"
         app:itemTextColor="@color/bottom_nav_text_color"
-        app:itemRippleColor="@color/bottom_nav_ripple"
+        app:itemRippleColor="@color/primary_light"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"

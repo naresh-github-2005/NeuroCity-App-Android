@@ -9,53 +9,115 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- 💜 Brand & Accent Colors (Admin Dashboard Theme) -->
-    <color name="admin_primary">#8C9EFF</color> <!-- Vibrant indigo accent -->
-    <color name="admin_primary_variant">#536DFE</color> <!-- Slightly darker tone -->
-    <color name="admin_secondary">#64B5F6</color> <!-- Soft blue secondary accent -->
-    <color name="admin_accent">#FF80AB</color> <!-- Pink accent for highlights -->
+    <!-- 🎨 Enhanced Brand & Accent Colors -->
+    <color name="admin_primary">#667EEA</color> <!-- Modern indigo -->
+    <color name="admin_primary_variant">#5A67D8</color> <!-- Slightly darker -->
+    <color name="admin_secondary">#4FD1C5</color> <!-- Teal accent -->
+    <color name="admin_accent">#F687B3</color> <!-- Soft pink accent -->
 
-    <!-- NeuroCity App Colors - Light Mode (Existing Theme) -->
-    <color name="primary_color">#3F51B5</color>
-    <color name="primary_dark">#303F9F</color>
-    <color name="primary_light">#C5CAE9</color>
+    <!-- NeuroCity App Colors - Light Mode (Enhanced) -->
+    <color name="primary_color">#667EEA</color> <!-- Modern indigo -->
+    <color name="primary_dark">#5A67D8</color>
+    <color name="primary_light">#E0E7FF</color>
+
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#667EEA</color>
+    <color name="gradient_end">#764BA2</color>
 
     <!-- Input field colors -->
-    <color name="input_box_stroke">#3F51B5</color>
-    <color name="input_hint">#3F51B5</color>
+    <color name="input_box_stroke">#667EEA</color>
+    <color name="input_hint">#667EEA</color>
+    <color name="input_focused">#5A67D8</color>
 
     <!-- Button colors -->
-    <color name="secondary_button_bg">#E8EAF6</color>
+    <color name="secondary_button_bg">#F7FAFC</color>
+    <color name="button_gradient_start">#667EEA</color>
+    <color name="button_gradient_end">#764BA2</color>
 
     <!-- Radio button colors -->
-    <color name="radio_button_tint">#3F51B5</color>
+    <color name="radio_button_tint">#667EEA</color>
 
     <!-- Submit/Success button color -->
-    <color name="submit_button_color">#059669</color>
+    <color name="submit_button_color">#10B981</color>
+    <color name="success_light">#D1FAE5</color>
+    <color name="success_dark">#065F46</color>
 
     <!-- Material 3 Indicator Color -->
     <color name="m3_indicator_color">@color/purple_500</color>
 
-    <!-- Light Mode Colors (Admin Dashboard) -->
-    <color name="background_light">#F5F7FA</color>
+    <!-- Light Mode Colors (Enhanced) -->
+    <color name="background_light">#F8FAFC</color>
+    <color name="background_secondary">#F1F5F9</color>
     <color name="surface_light">#FFFFFF</color>
-    <color name="text_primary_light">#1A1A1A</color>
-    <color name="text_secondary_light">#666666</color>
-
-    <!-- Night Mode Colors (will go in res/values-night/colors.xml) -->
-    <!-- background_dark, surface_dark, text_primary_dark, text_secondary_dark -->
+    <color name="surface_elevated">#FFFFFF</color>
+    <color name="text_primary_light">#1E293B</color>
+    <color name="text_secondary_light">#64748B</color>
+    <color name="text_tertiary_light">#94A3B8</color>
 
     <!-- Admin Dashboard Colors for Layout References -->
     <color name="cardBackgroundColor">@color/surface_light</color>
     <color name="backgroundColor">@color/background_light</color>
     <color name="textColorPrimary">@color/text_primary_light</color>
     <color name="textColorSecondary">@color/text_secondary_light</color>
-    <color name="dividerColor">#E0E0E0</color>
+    <color name="dividerColor">#E2E8F0</color>
 
-    <!-- Status Colors -->
-    <color name="statusPending">@color/admin_accent</color>
-    <color name="statusInProgress">@color/admin_secondary</color>
-    <color name="statusResolved">@color/admin_primary_variant</color>
+    <!-- Status Colors (Enhanced) -->
+    <color name="statusPending">#F59E0B</color>
+    <color name="statusPendingBg">#FEF3C7</color>
+    <color name="statusInProgress">#3B82F6</color>
+    <color name="statusInProgressBg">#DBEAFE</color>
+    <color name="statusResolved">#10B981</color>
+    <color name="statusResolvedBg">#D1FAE5</color>
+    <color name="statusRejected">#EF4444</color>
+    <color name="statusRejectedBg">#FEE2E2</color>
 
-    <color name="mapButtonColor">#009688</color>
+    <!-- Semantic Colors -->
+    <color name="error_color">#EF4444</color>
+    <color name="error_light">#FEE2E2</color>
+    <color name="warning_color">#F59E0B</color>
+    <color name="warning_light">#FEF3C7</color>
+    <color name="info_color">#3B82F6</color>
+    <color name="info_light">#DBEAFE</color>
+
+    <!-- Map & Location Colors -->
+    <color name="mapButtonColor">#14B8A6</color>
+    <color name="locationPrimary">#EF4444</color>
+    <color name="locationSecondary">#F87171</color>
+
+    <!-- Bottom Navigation Colors -->
+    <color name="bottom_nav_selected">#667EEA</color>
+    <color name="bottom_nav_unselected">#94A3B8</color>
+
+    <!-- Shadow Colors -->
+    <color name="shadow_light">#1A000000</color>
+    <color name="shadow_medium">#26000000</color>
+    <color name="shadow_strong">#40000000</color>
+
+    <!-- Overlay Colors -->
+    <color name="overlay_light">#0D000000</color>
+    <color name="overlay_medium">#4D000000</color>
+    <color name="overlay_dark">#80000000</color>
+
+    <!-- Additional colors for night mode compatibility -->
+    <color name="background_color">@color/background_light</color>
+    <color name="surface_color">@color/surface_light</color>
+    <color name="on_background">@color/text_primary_light</color>
+    <color name="on_surface">@color/text_primary_light</color>
+    <color name="primary_variant">@color/primary_dark</color>
+    <color name="secondary_color">@color/admin_secondary</color>
+    <color name="accent_color">@color/admin_accent</color>
+    <color name="input_text">@color/text_primary_light</color>
+    <color name="button_bg_primary">@color/primary_color</color>
+    <color name="button_bg_secondary">@color/secondary_button_bg</color>
+    <color name="button_text_color">@color/white</color>
+    <color name="radio_button_checked">@color/primary_color</color>
+    <color name="divider_color">@color/dividerColor</color>
+    <color name="disabled_text">@color/text_secondary_light</color>
+    <color name="text_primary_dark">@color/text_primary_light</color>
+    <color name="text_secondary_dark">@color/text_secondary_light</color>
+    <color name="text_tertiary_dark">@color/text_tertiary_light</color>
+    <color name="success_green">@color/submit_button_color</color>
+    <color name="warning_yellow">@color/warning_color</color>
+    <color name="error_red">@color/error_color</color>
+    <color name="info_blue">@color/info_color</color>
 </resources>

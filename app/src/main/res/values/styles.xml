@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/values/styles.xml -->
 <resources>
-    <!-- Your existing styles -->
-    <!-- Splash Screen Theme -->
-    <style name="Theme.NeuroCity.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowFullscreen">true</item>
+    <!-- Toolbar Text Appearance -->
+    <style name="TextAppearance.App.Toolbar" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
 
-    <style name="AppPopupMenu" parent="Widget.MaterialComponents.PopupMenu">
-        <item name="android:popupBackground">?attr/colorSurface</item>
-        <item name="android:textColor">?attr/colorOnSurface</item>
+    <!-- Headline Styles -->
+    <style name="TextAppearance.App.Headline1" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">@dimen/text_headline</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="App.BottomNavigationView.ActiveIndicator" parent="Widget.Material3.BottomNavigationView">
+    <style name="TextAppearance.App.Headline2" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+
+    <!-- Body Text Styles -->
+    <style name="TextAppearance.App.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/text_md</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="TextAppearance.App.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:lineSpacingExtra">3dp</item>
+    </style>
+
+    <!-- Caption Styles -->
+    <style name="TextAppearance.App.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="android:textSize">@dimen/text_xs</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
     </style>
 </resources>
+

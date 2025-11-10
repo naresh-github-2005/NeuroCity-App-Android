@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="5dp"
+    android:layout_margin="@dimen/card_margin"
+    app:cardCornerRadius="@dimen/radius_lg"
+    app:cardElevation="@dimen/elevation_sm"
     app:cardBackgroundColor="@color/cardBackgroundColor"
     app:strokeWidth="0dp">
 
@@ -14,17 +14,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:padding="@dimen/spacing_md">
 
-        <!-- 🖼️ Issue Image -->
-        <ImageView
-            android:id="@+id/imgIssue"
+        <!-- 🖼️ Issue Image with Frame -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/placeholder_bg"
-            android:contentDescription="@string/issue_image_desc"
-            android:adjustViewBounds="true"/>
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/radius_md"
+            app:cardElevation="0dp"
+            android:layout_marginBottom="@dimen/spacing_md">
+
+            <ImageView
+                android:id="@+id/imgIssue"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/placeholder_bg"
+                android:contentDescription="@string/issue_image_desc"
+                android:adjustViewBounds="true"/>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- 📛 Issue Type -->
         <TextView
@@ -33,9 +41,10 @@
             android:layout_height="wrap_content"
             android:text="Issue Type"
             android:textStyle="bold"
-            android:textSize="18sp"
+            android:textSize="@dimen/text_lg"
             android:textColor="@color/textColorPrimary"
-            android:layout_marginTop="10dp"/>
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="@dimen/spacing_sm"/>
 
         <!-- 📝 Issue Description -->
         <TextView
@@ -43,11 +52,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Issue description will appear here"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_sm"
             android:textColor="@color/textColorSecondary"
-            android:layout_marginTop="6dp"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginBottom="@dimen/spacing_md"
             android:maxLines="2"
             android:ellipsize="end"/>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/dividerColor"
+            android:layout_marginBottom="@dimen/spacing_md"/>
 
         <!-- 🏢 Department -->
         <TextView
@@ -55,9 +72,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dept: Water Supply"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_sm"
             android:textColor="@color/textColorSecondary"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginBottom="@dimen/spacing_xs"/>
 
         <!-- 👷 Assigned Worker -->
         <TextView
@@ -65,9 +82,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Assigned to: -"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_sm"
+            android:textStyle="bold"
             android:textColor="@color/statusInProgress"
-            android:layout_marginTop="4dp"
+            android:layout_marginBottom="@dimen/spacing_xs"
             android:visibility="gone"/>
 
         <!-- 🟢 Status -->
@@ -76,9 +94,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Status: Pending"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_sm"
+            android:textStyle="bold"
             android:textColor="@color/statusPending"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginBottom="@dimen/spacing_xs"/>
 
         <!-- ⏰ Reported Time -->
         <TextView
@@ -86,54 +105,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Reported: -"
-            android:textSize="13sp"
+            android:textSize="@dimen/text_xs"
             android:textColor="@color/textColorSecondary"
-            android:layout_marginTop="4dp"/>
+            android:layout_marginBottom="@dimen/spacing_md"/>
 
         <!-- ⚙️ Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="12dp">
+            android:orientation="vertical">
 
             <!-- First Row: View Map & Assign Worker -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="end">
+                android:gravity="end"
+                android:layout_marginBottom="@dimen/spacing_sm">
 
                 <!-- View Map -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnViewMap"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/button_height_sm"
                     android:text="View Map"
                     android:textAllCaps="false"
-                    app:cornerRadius="24dp"
+                    android:textSize="@dimen/text_sm"
+                    app:cornerRadius="@dimen/radius_full"
                     app:icon="@drawable/ic_location_pin"
-                    app:iconPadding="6dp"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
+                    app:iconPadding="@dimen/spacing_xs"
+                    android:paddingStart="@dimen/spacing_md"
+                    android:paddingEnd="@dimen/spacing_md"
                     app:backgroundTint="@color/mapButtonColor"
                     android:textColor="@android:color/white"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="@dimen/spacing_sm"
+                    android:stateListAnimator="@null"/>
 
                 <!-- Assign Worker -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAssignWorker"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/button_height_sm"
                     android:text="Assign"
                     android:textAllCaps="false"
-                    app:cornerRadius="24dp"
+                    android:textSize="@dimen/text_sm"
+                    app:cornerRadius="@dimen/radius_full"
                     app:icon="@drawable/ic_worker"
-                    app:iconPadding="6dp"
-                    android:paddingStart="18dp"
-                    android:paddingEnd="18dp"
+                    app:iconPadding="@dimen/spacing_xs"
+                    android:paddingStart="@dimen/spacing_md"
+                    android:paddingEnd="@dimen/spacing_md"
                     app:backgroundTint="@color/statusInProgress"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    android:stateListAnimator="@null"/>
             </LinearLayout>
 
             <!-- Second Row: Update Status -->
@@ -141,14 +164,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="end"
-                android:layout_marginTop="8dp">
+                android:gravity="end">
 
                 <!-- Update Status -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnUpdateStatus"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/button_height_sm"
                     android:text="Status"
                     android:textAllCaps="false"
                     app:cornerRadius="24dp"

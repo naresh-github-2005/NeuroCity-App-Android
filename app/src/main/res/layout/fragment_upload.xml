@@ -99,37 +99,41 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="@dimen/spacing_lg">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCamera"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/button_height_lg"
                 android:layout_weight="1"
                 android:text=" Capture"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/primary_color"
+                android:layout_marginEnd="@dimen/spacing_sm"
+                android:background="@drawable/button_gradient_primary"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                app:cornerRadius="12dp"
+                android:textSize="@dimen/text_md"
+                app:cornerRadius="@dimen/radius_md"
                 app:icon="@android:drawable/ic_menu_camera"
                 app:iconTint="@android:color/white"
-                app:iconGravity="textStart"/>
+                app:iconGravity="textStart"
+                android:stateListAnimator="@null"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGallery"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/button_height_lg"
                 android:layout_weight="1"
                 android:text=" Gallery"
-                android:layout_marginStart="8dp"
-                android:backgroundTint="@color/primary_color"
+                android:layout_marginStart="@dimen/spacing_sm"
+                android:background="@drawable/button_gradient_primary"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
-                app:cornerRadius="12dp"
+                android:textSize="@dimen/text_md"
+                app:cornerRadius="@dimen/radius_md"
                 app:icon="@android:drawable/ic_menu_gallery"
                 app:iconTint="@android:color/white"
-                app:iconGravity="textStart"/>
+                app:iconGravity="textStart"
+                android:stateListAnimator="@null"/>
         </LinearLayout>
 
         <!-- Issue Type Selection Card -->

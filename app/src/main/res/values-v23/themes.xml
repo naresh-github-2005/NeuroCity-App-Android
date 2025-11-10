@@ -7,7 +7,7 @@
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
 
-    <style name="Theme.Neurocity" parent="Base.Theme.Neurocity">
+    <style name="Theme.Neurocity" parent="Base.Theme.NeuroCity">
         <!-- Transparent system bars for edge-to-edge. -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

@@ -1,54 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Enhanced Dark Mode Palette -->
+    <color name="background_color">#0F172A</color>
+    <color name="background_secondary">#1E293B</color>
+    <color name="surface_color">#1E293B</color>
+    <color name="surface_elevated">#334155</color>
+    <color name="on_background">#F1F5F9</color>
+    <color name="on_surface">#F8FAFC</color>
 
-    <!-- 🌙 Core Dark Mode Palette -->
-    <color name="background_color">#121212</color>  <!-- Deep dark background -->
-    <color name="surface_color">#1E1E1E</color>    <!-- Slightly lighter card/surface -->
-    <color name="on_background">#EDEDED</color>    <!-- Text on dark background -->
-    <color name="on_surface">#FAFAFA</color>       <!-- Text on surfaces -->
+    <!-- Brand & Accent Colors (Enhanced) -->
+    <color name="primary_color">#818CF8</color>
+    <color name="primary_variant">#6366F1</color>
+    <color name="secondary_color">#5EEAD4</color>
+    <color name="accent_color">#F9A8D4</color>
 
-    <!-- 💜 Brand & Accent Colors -->
-    <color name="primary_color">#8C9EFF</color>    <!-- Vibrant indigo accent -->
-    <color name="primary_variant">#536DFE</color>  <!-- Slightly darker tone -->
-    <color name="secondary_color">#64B5F6</color>  <!-- Soft blue secondary accent -->
-    <color name="accent_color">#FF80AB</color>     <!-- Pink accent for highlights -->
+    <!-- Input & UI Elements -->
+    <color name="input_box_stroke">#818CF8</color>
+    <color name="input_hint">#A5B4FC</color>
+    <color name="input_text">#F8FAFC</color>
+    <color name="input_focused">#6366F1</color>
 
-    <!-- ✏️ Input & UI Elements -->
-    <color name="input_box_stroke">#5C6BC0</color>
-    <color name="input_hint">#9FA8DA</color>
-    <color name="input_text">#FFFFFF</color>
-
-    <!-- 🔘 Button & Action Colors -->
-    <color name="button_bg_primary">#3949AB</color>
-    <color name="button_bg_secondary">#283593</color>
+    <!-- Button & Action Colors -->
+    <color name="button_bg_primary">#6366F1</color>
+    <color name="button_bg_secondary">#475569</color>
     <color name="button_text_color">#FFFFFF</color>
+    <color name="button_gradient_start">#818CF8</color>
+    <color name="button_gradient_end">#A78BFA</color>
 
-    <!-- ⚙️ Radio Buttons & Toggles -->
-    <color name="radio_button_tint">#9FA8DA</color>
-    <color name="radio_button_checked">#8C9EFF</color>
+    <!-- Radio Buttons & Toggles -->
+    <color name="radio_button_tint">#A5B4FC</color>
+    <color name="radio_button_checked">#818CF8</color>
 
-    <!-- 🖋️ Generic Colors -->
+    <!-- Generic Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="divider_color">#2C2C2C</color>
-    <color name="disabled_text">#7E7E7E</color>
+    <color name="divider_color">#334155</color>
+    <color name="disabled_text">#64748B</color>
 
-    <!-- ✅ Status / Feedback Colors -->
-    <color name="success_green">#81C784</color>
-    <color name="warning_yellow">#FFD54F</color>
-    <color name="error_red">#E57373</color>
-    <color name="info_blue">#4FC3F7</color>
+    <!-- Text Colors -->
+    <color name="text_primary_dark">#F8FAFC</color>
+    <color name="text_secondary_dark">#CBD5E1</color>
+    <color name="text_tertiary_dark">#94A3B8</color>
 
-    <!-- 🌓 Admin Dashboard Dark Mode References -->
-    <color name="cardBackgroundColor">@color/surface_color</color> <!-- #1E1E1E -->
-    <color name="backgroundColor">@color/background_color</color>   <!-- #121212 -->
-    <color name="textColorPrimary">@color/white</color>            <!-- #FFFFFF -->
-    <color name="textColorSecondary">#CCCCCC</color>
-    <color name="dividerColor">#444444</color>
+    <!-- Status / Feedback Colors -->
+    <color name="success_green">#34D399</color>
+    <color name="success_light">#064E3B</color>
+    <color name="warning_yellow">#FBBF24</color>
+    <color name="warning_light">#78350F</color>
+    <color name="error_red">#F87171</color>
+    <color name="error_light">#7F1D1D</color>
+    <color name="info_blue">#60A5FA</color>
+    <color name="info_light">#1E3A8A</color>
 
-    <!-- Status Colors for Dashboard -->
-    <color name="statusPending">#FF4081</color>
-    <color name="statusInProgress">#2196F3</color>
-    <color name="statusResolved">#4CAF50</color>
+    <!-- Admin Dashboard Dark Mode References -->
+    <color name="cardBackgroundColor">@color/surface_color</color>
+    <color name="backgroundColor">@color/background_color</color>
+    <color name="textColorPrimary">@color/text_primary_dark</color>
+    <color name="textColorSecondary">@color/text_secondary_dark</color>
+    <color name="dividerColor">#334155</color>
 
+    <!-- Status Colors for Dashboard (Dark Mode) -->
+    <color name="statusPending">#F59E0B</color>
+    <color name="statusPendingBg">#78350F</color>
+    <color name="statusInProgress">#60A5FA</color>
+    <color name="statusInProgressBg">#1E3A8A</color>
+    <color name="statusResolved">#34D399</color>
+    <color name="statusResolvedBg">#064E3B</color>
+    <color name="statusRejected">#F87171</color>
+    <color name="statusRejectedBg">#7F1D1D</color>
+
+    <!-- Bottom Navigation Colors -->
+    <color name="bottom_nav_selected">#818CF8</color>
+    <color name="bottom_nav_unselected">#64748B</color>
+
+    <!-- Shadow Colors -->
+    <color name="shadow_light">#0D000000</color>
+    <color name="shadow_medium">#1A000000</color>
+    <color name="shadow_strong">#26000000</color>
+
+    <!-- Overlay Colors -->
+    <color name="overlay_light">#1A000000</color>
+    <color name="overlay_medium">#4D000000</color>
+    <color name="overlay_dark">#80000000</color>
 </resources>

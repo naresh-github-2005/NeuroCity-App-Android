@@ -38,9 +38,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
-            android:padding="12dp"
+            android:padding="@dimen/spacing_md"
             android:background="@color/cardBackgroundColor"
-            android:elevation="3dp">
+            android:elevation="@dimen/elevation_xs">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -51,53 +51,61 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnAll"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/button_height_md"
                     android:text="All"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_sm"
                     android:textAllCaps="false"
-                    android:paddingStart="28dp"
-                    android:paddingEnd="28dp"
-                    android:layout_marginEnd="8dp"
-                    app:cornerRadius="24dp"
-                    app:backgroundTint="@color/admin_primary" />
+                    android:paddingStart="@dimen/spacing_lg"
+                    android:paddingEnd="@dimen/spacing_lg"
+                    android:layout_marginEnd="@dimen/spacing_sm"
+                    app:cornerRadius="@dimen/radius_full"
+                    android:background="@drawable/button_gradient_primary"
+                    android:textColor="@android:color/white"
+                    android:stateListAnimator="@null" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnPending"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/button_height_md"
                     android:text="Pending"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_sm"
                     android:textAllCaps="false"
-                    android:paddingStart="28dp"
-                    android:paddingEnd="28dp"
-                    android:layout_marginEnd="8dp"
-                    app:cornerRadius="24dp"
-                    app:backgroundTint="@color/statusPending" />
+                    android:paddingStart="@dimen/spacing_lg"
+                    android:paddingEnd="@dimen/spacing_lg"
+                    android:layout_marginEnd="@dimen/spacing_sm"
+                    app:cornerRadius="@dimen/radius_full"
+                    app:backgroundTint="@color/statusPending"
+                    android:textColor="@android:color/white"
+                    android:stateListAnimator="@null" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnInProgress"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/button_height_md"
                     android:text="In Progress"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_sm"
                     android:textAllCaps="false"
-                    android:paddingStart="28dp"
-                    android:paddingEnd="28dp"
-                    android:layout_marginEnd="8dp"
-                    app:cornerRadius="24dp"
-                    app:backgroundTint="@color/statusInProgress" />
+                    android:paddingStart="@dimen/spacing_lg"
+                    android:paddingEnd="@dimen/spacing_lg"
+                    android:layout_marginEnd="@dimen/spacing_sm"
+                    app:cornerRadius="@dimen/radius_full"
+                    app:backgroundTint="@color/statusInProgress"
+                    android:textColor="@android:color/white"
+                    android:stateListAnimator="@null" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnResolved"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="@dimen/button_height_md"
                     android:text="Resolved"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_sm"
                     android:textAllCaps="false"
-                    android:paddingStart="28dp"
-                    android:paddingEnd="28dp"
-                    app:cornerRadius="24dp"
-                    app:backgroundTint="@color/statusResolved" />
+                    android:paddingStart="@dimen/spacing_lg"
+                    android:paddingEnd="@dimen/spacing_lg"
+                    app:cornerRadius="@dimen/radius_full"
+                    app:backgroundTint="@color/statusResolved"
+                    android:textColor="@android:color/white"
+                    android:stateListAnimator="@null" />
             </LinearLayout>
         </HorizontalScrollView>
 
