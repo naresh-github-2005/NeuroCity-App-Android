@@ -325,8 +325,8 @@ Firestore Root
 
 | Name                  | Contact                                                                               |
 | --------------------- | ------------------------------------------------------------------------------------- |
-| **Mohammed Arfath R** | [mohammedarfath.r2022@vitstudent.ac.in](mailto:mohammedarfath.r2022@vitstudent.ac.in) |
 | **Naresh R**          | [naresh.r2022a@vitstudent.ac.in](mailto:naresh.r2022a@vitstudent.ac.in)               |
+| **Mohammed Arfath R** | [mohammedarfath.r2022@vitstudent.ac.in](mailto:mohammedarfath.r2022@vitstudent.ac.in) |
 | **Mohammad Yusuf**    | [mohammadyusuf.ka2022@vitstudent.ac.in](mailto:mohammadyusuf.ka2022@vitstudent.ac.in) |
 
 ---
