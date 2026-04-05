@@ -2,7 +2,7 @@
 # 🏙️ **NeuroCity – AI-Powered Civic Issue Tracking & Resolution Platform**
 
 > **Empowering Citizens. Enhancing Governance. Building Smarter Cities.**
-
+[Demo-link](https://drive.google.com/drive/folders/1XeLSfx-rLHDcy3A1BAV0ks2fChHA0W81?usp=sharing)
 <p align="center">
   <img width="1333" height="411" alt="NeuroCity Banner" src="https://github.com/user-attachments/assets/ee7387e9-290b-429e-8d87-dde2f8ff1702" />
 </p>
