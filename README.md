@@ -80,8 +80,11 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
 
 ---
 
+## 🏗️ **System Architecture**
 
+<img width="1600" height="893" alt="NeuroCity_Architecture_Diagram" src="https://github.com/user-attachments/assets/967c03bd-536c-472e-85c4-0effc3d8e387" />
 
+---
 
 ## 🔄 **Application Workflow**
 
@@ -119,11 +122,6 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
   <img width="1037" height="183" alt="Untitled diagram-2025-11-02-144554" src="https://github.com/user-attachments/assets/4edcbf89-4ee5-4ff4-8b21-feb3c70d754a" />
 
 
-
----
-
-## 🖼️ **System Architecture**
-<img width="1600" height="893" alt="NeuroCity_Architecture_Diagram" src="https://github.com/user-attachments/assets/967c03bd-536c-472e-85c4-0effc3d8e387" />
 
 ---
 
