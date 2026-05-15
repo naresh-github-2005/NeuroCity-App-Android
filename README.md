@@ -39,6 +39,7 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
 
 - [Core Features](#-core-features)
 - [User Roles](#-user-roles)
+- [System Architecture](#-system-architecture)
 - [Application Workflow](#-application-workflow)
 - [Technology Stack](#-technology-stack)
 - [Android Components](#-android-components)
@@ -48,7 +49,6 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
 - [Firestore Database Structure](#-firestore-database-structure)
 - [Permissions](#-permissions)
 - [Setup & Configuration](#-setup--configuration)
-- [Screenshots](#-screenshots)
 - [Future Enhancements](#-future-enhancements)
 - [Contributors](#-contributors)
 - [License](#-license)
@@ -79,6 +79,9 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
 | 🧑‍💼 **Admin** | Monitors all issues, filters by status, assigns workers, and updates progress in real time. |
 
 ---
+
+
+
 
 ## 🔄 **Application Workflow**
 
@@ -116,6 +119,11 @@ Modern cities face numerous civic issues — from potholes and waste overflow to
   <img width="1037" height="183" alt="Untitled diagram-2025-11-02-144554" src="https://github.com/user-attachments/assets/4edcbf89-4ee5-4ff4-8b21-feb3c70d754a" />
 
 
+
+---
+
+## 🖼️ **System Architecture**
+<img width="1600" height="893" alt="NeuroCity_Architecture_Diagram" src="https://github.com/user-attachments/assets/967c03bd-536c-472e-85c4-0effc3d8e387" />
 
 ---
 
@@ -278,36 +286,6 @@ Firestore Root
 4. **Build & Run**
 
    * Sync Gradle and launch on emulator/device.
-
----
-
-## 🖼️ **Screenshots**
-
-<p align="center"><em>Experience NeuroCity – Smart Civic Collaboration in Action</em></p>
-
-### 🚀 **Splash & Authentication**
-
-| Splash                  | Login                   | Register                |
-| ----------------------- | ----------------------- | ----------------------- |
-| *(Add screenshot here)* | *(Add screenshot here)* | *(Add screenshot here)* |
-
-### 👤 **Citizen Side**
-
-| Report Issue                      | Track Issue                              | View Map                       |
-| --------------------------------- | ---------------------------------------- | ------------------------------ |
-| *(Add UploadFragment screenshot)* | *(Add IssueTrackingActivity screenshot)* | *(Add MapFragment screenshot)* |
-
-### 👷 **Worker Side**
-
-| Worker Dashboard                           | Upload Resolved Image                | Route Generation             |
-| ------------------------------------------ | ------------------------------------ | ---------------------------- |
-| *(Add WorkerDashboardActivity screenshot)* | *(Add Worker Issue card screenshot)* | *(Add Route FAB screenshot)* |
-
-### 🧑‍💼 **Admin Side**
-
-| Admin Dashboard                    | Status Filter                     | Issue Management                 |
-| ---------------------------------- | --------------------------------- | -------------------------------- |
-| *(Add Admin Dashboard screenshot)* | *(Add Filter Buttons screenshot)* | *(Add Status Dialog screenshot)* |
 
 ---
 
